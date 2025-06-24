@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open DCS - Open Device Control System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.x/dist/typography.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sb-track-color: #2a2a2a;
+            --sb-thumb-color: #555;
+            --sb-size: 8px;
+        }
+
+        ::-webkit-scrollbar {
+            width: var(--sb-size);
+            height: var(--sb-size);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 5px;
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+            body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .hero-bg {
+            background: #1a1a1a;
+            background-image: radial-gradient(circle at 1px 1px, #3a3a3a 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .section-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .architecture-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            padding: 2rem;
+            background-color: #1e1e1e;
+            border-radius: 0.75rem;
+            border: 1px solid #333;
+        }
+        .arch-layer {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .arch-layer-title {
+            font-weight: 700;
+            color: #00aaff;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        .arch-components {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .arch-component {
+            background-color: #333;
+            color: #e0e0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        .arch-component:hover {
+             background-color: #00aaff;
+             color: #fff;
+        }
+        .arch-arrow {
+            text-align: center;
+            color: #555;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .tech-stack-details {
+            background-color: #2a2a2a;
+            border-radius: 0.5rem;
+            border: 1px solid #444;
+            transition: background-color 0.3s;
+        }
+        .tech-stack-details:hover {
+            background-color: #333;
+        }
+        .tech-stack-details summary {
+            color: #eee;
+        }
+        .tech-stack-details strong {
+            color: #9ca3af; /* text-gray-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg shadow-black/20">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white">Open DCS</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-400 hover:text-blue-400 transition-colors">Overview</a>
+                <a href="#architecture" class="text-gray-400 hover:text-blue-400 transition-colors">Architecture</a>
+                <a href="#algorithms" class="text-gray-400 hover:text-blue-400 transition-colors">Algorithms</a>
+                <a href="#features" class="text-gray-400 hover:text-blue-400 transition-colors">Features</a>
+                <a href="#advantages" class="text-gray-400 hover:text-blue-400 transition-colors">Advantages</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#overview" class="block py-2 text-gray-400 hover:text-blue-400">Overview</a>
+            <a href="#architecture" class="block py-2 text-gray-400 hover:text-blue-400">Architecture</a>
+            <a href="#algorithms" class="block py-2 text-gray-400 hover:text-blue-400">Algorithms</a>
+            <a href="#features" class="block py-2 text-gray-400 hover:text-blue-400">Features</a>
+            <a href="#advantages" class="block py-2 text-gray-400 hover:text-blue-400">Advantages</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hero Section -->
+        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Open DCS</h2>
+            <p class="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">An Open Device Control System for Smart Manufacturing and Logistics</p>
+            <p class="mt-8 text-lg text-gray-500 max-w-4xl mx-auto">Focusing on core challenges like multi-agent pathfinding, task scheduling, and device management to deliver flexible, efficient, and scalable automation solutions.</p>
+        </section>
+
+        <!-- Core Value Section -->
+        <section id="overview" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">Core Value</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Unified Device Management</h4>
+                    <p class="text-gray-400">Manages heterogeneous devices through abstract models and supports various protocols.</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Intelligent Pathfinding</h4>
+                    <p class="text-gray-400">Industry-leading multi-agent pathfinding with millisecond-level response.</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Flexible Business Orchestration</h4>
+                    <p class="text-gray-400">Workflow-based task orchestration with a visual process designer.</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">High Availability Architecture</h4>
+                    <p class="text-gray-400">Distributed system supporting horizontal scaling with comprehensive monitoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Architecture Section -->
+        <section id="architecture" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">Technical Architecture</h3>
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <div class="w-full lg:w-3/5">
+                     <div class="architecture-container">
+                        <!-- Layer 1 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">Application Layer</div>
+                            <div class="arch-components">
+                                <div class="arch-component">Warehouse</div>
+                                <div class="arch-component">QuickPick</div>
+                                <div class="arch-component">Vehicle Starter</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 2 -->
+                         <div class="arch-layer">
+                            <div class="arch-layer-title">Business Layer</div>
+                            <div class="arch-components">
+                                <div class="arch-component">Workflow</div>
+                                <div class="arch-component">Scheduler</div>
+                                <div class="arch-component">Scene Manager</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 3 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">Algorithm Layer</div>
+                            <div class="arch-components">
+                                <div class="arch-component">MAPF</div>
+                                <div class="arch-component">Allocation</div>
+                                <div class="arch-component">Traffic Control</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 4 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">Device Layer</div>
+                             <div class="arch-components">
+                                <div class="arch-component">Standard Adapters</div>
+                                <div class="arch-component">PLC Adapter</div>
+                                <div class="arch-component">Proprietary Protocol</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 5 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">Framework Layer</div>
+                             <div class="arch-components">
+                                <div class="arch-component">Core Framework</div>
+                                <div class="arch-component">Persistence (PostgreSQL)</div>
+                                <div class="arch-component">Message Bus</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-2/5 prose max-w-none prose-invert">
+                    <h4 class="text-2xl font-semibold text-white">Technology Stack</h4>
+                    <details class="tech-stack-details p-4 mb-4">
+                        <summary class="font-semibold cursor-pointer">Backend Technology</summary>
+                        <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>Language:</strong> Java 17 + Kotlin</li>
+                            <li><strong>Framework:</strong> Spring Boot 3.x, Spring Cloud</li>
+                            <li><strong>Persistence:</strong> MyBatis-Plus, PostgreSQL</li>
+                            <li><strong>Communication:</strong> MQTT, gRPC, WebSocket</li>
+                        </ul>
+                    </details>
+                    <details class="tech-stack-details p-4 mb-4">
+                        <summary class="font-semibold cursor-pointer">Frontend Technology</summary>
+                         <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>Framework:</strong> Vue 3 + TypeScript</li>
+                            <li><strong>UI:</strong> Element Plus</li>
+                            <li><strong>Build Tool:</strong> Vite</li>
+                            <li><strong>Visualization:</strong> Canvas 2D, Three.js</li>
+                        </ul>
+                    </details>
+                     <details class="tech-stack-details p-4">
+                        <summary class="font-semibold cursor-pointer">Algorithm Implementation</summary>
+                         <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>Language:</strong> Java + Kotlin</li>
+                            <li><strong>Concurrency:</strong> Kotlin Coroutines</li>
+                            <li><strong>Data Structures:</strong> Priority Queues, Conflict Trees</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Algorithms Section -->
+        <section id="algorithms" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">Core Algorithms</h3>
+            <div class="space-y-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-2xl font-semibold mb-3 text-blue-400">MAPF + Traffic Control</h4>
+                    <p class="text-gray-400 mb-4">A deep integration of pathfinding and traffic management, offering three complementary algorithms for different scenarios.</p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-blue-400">CBS (Conflict-Based Search)</h5>
+                            <p class="text-sm text-gray-400">Guarantees optimal solutions, ideal for scenarios requiring high path quality. <br><strong>Perf:</strong> &lt;100ms in medium-scale scenes.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-green-400">Improved LaCAM2</h5>
+                            <p class="text-sm text-gray-400">Heuristic search with traffic control for large-scale, real-time deployments.<br><strong>Perf:</strong> Initial solution &lt;500ms.</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-yellow-400">CLrp (Proprietary)</h5>
+                            <p class="text-sm text-gray-400">Blazing fast response for dynamic environments with frequent task changes. <br><strong>Perf:</strong> 10-100ms per plan.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-2xl font-semibold mb-3 text-blue-400">Resource Allocation Algorithm</h4>
+                     <p class="text-gray-400">Flexible time-window based allocation using a best-match algorithm based on priority and time. Applied for charging, workstation, and storage location assignments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Functions Section -->
+        <section id="features" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">Business Functions</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Warehouse Management</h4>
+                    <p class="text-gray-400">Automated inbound, outbound, inventory, and dual-workstation processes.</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">QuickPick Scenario</h4>
+                    <p class="text-gray-400">Goods-to-person picking, intelligent AGV scheduling, and dynamic replenishment.</p>
+                </div>
+                 <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Device Management</h4>
+                    <p class="text-gray-400">Unified access, status monitoring, fault diagnosis, and remote control.</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">Visualization & Monitoring</h4>
+                    <p class="text-gray-400">2D/3D maps, task dashboards, data analytics, and a multi-level alarm center.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Highlights & Competitive Advantages -->
+        <section id="advantages" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">Key Differentiators</h3>
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h4 class="text-2xl font-bold text-center mb-6 text-white">Technical Highlights</h4>
+                    <div class="space-y-6">
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Intelligent Multi-Algorithm Selection</h5>
+                            <p class="text-gray-400">Precisely matches algorithms to business needs, balancing performance and path quality.</p>
+                        </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Extreme Extensibility</h5>
+                            <p class="text-gray-400">Open ecosystem design for easy device, scenario, and system integration.</p>
+                        </div>
+                         <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Process-Driven Task Orchestration</h5>
+                            <p class="text-gray-400">Enables intelligent automation with a low-code, visual workflow designer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold text-center mb-6 text-white">Competitive Edge</h4>
+                     <div class="space-y-6">
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Algorithm Leadership</h5>
+                            <p class="text-gray-400">Proprietary and improved algorithms offer superior performance and applicability.</p>
+                        </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Flexible Deployment</h5>
+                            <p class="text-gray-400">Supports public cloud, private cloud, and on-premises deployments.</p>
+                        </div>
+                         <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">Cost Advantage</h5>
+                            <p class="text-gray-400">Modular design reduces implementation and maintenance costs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Conclusion -->
+        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg">
+            <h3 class="text-3xl font-bold mb-4">Conclusion</h3>
+            <p class="max-w-4xl mx-auto text-gray-400">
+                Open DCS is a next-generation open device control system providing a one-stop solution for smart manufacturing and logistics. With its core advantages—intelligent algorithm selection, extreme extensibility, and process-driven task orchestration—it addresses key industry pain points, offering significant market potential and investment value.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 mt-16 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Open DCS. All rights reserved.</p>
+            <p class="text-sm mt-2">Pioneering the future of industrial automation.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open DCS - 开放设备控制系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.x/dist/typography.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --sb-track-color: #2a2a2a;
+            --sb-thumb-color: #555;
+            --sb-size: 8px;
+        }
+
+        ::-webkit-scrollbar {
+            width: var(--sb-size);
+            height: var(--sb-size);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 5px;
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+            body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .hero-bg {
+            background: #1a1a1a;
+            background-image: radial-gradient(circle at 1px 1px, #3a3a3a 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        
+        .section-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .architecture-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            padding: 2rem;
+            background-color: #1e1e1e;
+            border-radius: 0.75rem;
+            border: 1px solid #333;
+        }
+        .arch-layer {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .arch-layer-title {
+            font-weight: 700;
+            color: #00aaff;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        .arch-components {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .arch-component {
+            background-color: #333;
+            color: #e0e0e0;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        .arch-component:hover {
+             background-color: #00aaff;
+             color: #fff;
+        }
+        .arch-arrow {
+            text-align: center;
+            color: #555;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        .tech-stack-details {
+            background-color: #2a2a2a;
+            border-radius: 0.5rem;
+            border: 1px solid #444;
+            transition: background-color 0.3s;
+        }
+        .tech-stack-details:hover {
+            background-color: #333;
+        }
+        .tech-stack-details summary {
+            color: #eee;
+        }
+        .tech-stack-details strong {
+            color: #9ca3af; /* text-gray-400 */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg shadow-black/20">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white">Open DCS</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-400 hover:text-blue-400 transition-colors">概览</a>
+                <a href="#architecture" class="text-gray-400 hover:text-blue-400 transition-colors">技术架构</a>
+                <a href="#algorithms" class="text-gray-400 hover:text-blue-400 transition-colors">核心算法</a>
+                <a href="#features" class="text-gray-400 hover:text-blue-400 transition-colors">业务功能</a>
+                <a href="#advantages" class="text-gray-400 hover:text-blue-400 transition-colors">技术优势</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
+            <a href="#overview" class="block py-2 text-gray-400 hover:text-blue-400">概览</a>
+            <a href="#architecture" class="block py-2 text-gray-400 hover:text-blue-400">技术架构</a>
+            <a href="#algorithms" class="block py-2 text-gray-400 hover:text-blue-400">核心算法</a>
+            <a href="#features" class="block py-2 text-gray-400 hover:text-blue-400">业务功能</a>
+            <a href="#advantages" class="block py-2 text-gray-400 hover:text-blue-400">技术优势</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hero Section -->
+        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Open DCS</h2>
+            <p class="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">一个面向智能制造与智慧物流的开放设备控制系统</p>
+            <p class="mt-8 text-lg text-gray-500 max-w-4xl mx-auto">聚焦多智能体路径规划、任务调度、设备管理等核心挑战，提供灵活、高效、可扩展的自动化解决方案。</p>
+        </section>
+
+        <!-- Core Value Section -->
+        <section id="overview" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">核心价值</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">统一设备管理</h4>
+                    <p class="text-gray-400">通过抽象模型管理异构设备，并支持多种协议。</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">智能路径规划</h4>
+                    <p class="text-gray-400">业界领先的多智能体路径规划，毫秒级响应。</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">灵活业务编排</h4>
+                    <p class="text-gray-400">基于工作流的任务编排，提供可视化流程设计器。</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">高可用架构</h4>
+                    <p class="text-gray-400">分布式系统支持水平扩展，并提供全面的监控。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Architecture Section -->
+        <section id="architecture" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">技术架构</h3>
+            <div class="flex flex-col lg:flex-row gap-8 items-start">
+                <div class="w-full lg:w-3/5">
+                     <div class="architecture-container">
+                        <!-- Layer 1 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">应用层</div>
+                            <div class="arch-components">
+                                <div class="arch-component">仓储</div>
+                                <div class="arch-component">拣选</div>
+                                <div class="arch-component">车辆启动器</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 2 -->
+                         <div class="arch-layer">
+                            <div class="arch-layer-title">业务层</div>
+                            <div class="arch-components">
+                                <div class="arch-component">工作流</div>
+                                <div class="arch-component">调度器</div>
+                                <div class="arch-component">场景管理器</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 3 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">算法层</div>
+                            <div class="arch-components">
+                                <div class="arch-component">多智能体路径规划</div>
+                                <div class="arch-component">资源分配</div>
+                                <div class="arch-component">交通管制</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 4 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">设备层</div>
+                             <div class="arch-components">
+                                <div class="arch-component">标准适配器</div>
+                                <div class="arch-component">PLC适配器</div>
+                                <div class="arch-component">私有协议</div>
+                            </div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <!-- Layer 5 -->
+                        <div class="arch-layer">
+                            <div class="arch-layer-title">框架层</div>
+                             <div class="arch-components">
+                                <div class="arch-component">核心框架</div>
+                                <div class="arch-component">持久化 (PostgreSQL)</div>
+                                <div class="arch-component">消息总线</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-2/5 prose max-w-none prose-invert">
+                    <h4 class="text-2xl font-semibold text-white">技术栈</h4>
+                    <details class="tech-stack-details p-4 mb-4">
+                        <summary class="font-semibold cursor-pointer">后端技术</summary>
+                        <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>语言:</strong> Java 17 + Kotlin</li>
+                            <li><strong>框架:</strong> Spring Boot 3.x, Spring Cloud</li>
+                            <li><strong>持久化:</strong> MyBatis-Plus, PostgreSQL</li>
+                            <li><strong>通信:</strong> MQTT, gRPC, WebSocket</li>
+                        </ul>
+                    </details>
+                    <details class="tech-stack-details p-4 mb-4">
+                        <summary class="font-semibold cursor-pointer">前端技术</summary>
+                         <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>框架:</strong> Vue 3 + TypeScript</li>
+                            <li><strong>UI:</strong> Element Plus</li>
+                            <li><strong>构建工具:</strong> Vite</li>
+                            <li><strong>可视化:</strong> Canvas 2D, Three.js</li>
+                        </ul>
+                    </details>
+                     <details class="tech-stack-details p-4">
+                        <summary class="font-semibold cursor-pointer">算法实现</summary>
+                         <ul class="mt-2 list-disc list-inside text-gray-300">
+                            <li><strong>语言:</strong> Java + Kotlin</li>
+                            <li><strong>并发:</strong> Kotlin 协程</li>
+                            <li><strong>数据结构:</strong> 优先队列, 冲突树</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Algorithms Section -->
+        <section id="algorithms" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">核心算法</h3>
+            <div class="space-y-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-2xl font-semibold mb-3 text-blue-400">多智能体路径规划 + 交通管制</h4>
+                    <p class="text-gray-400 mb-4">深度融合路径规划与交通管理，提供三种互补算法以适应不同场景。</p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-blue-400">CBS (基于冲突的搜索)</h5>
+                            <p class="text-sm text-gray-400">保证最优解，适用于对路径质量要求高的场景。<br><strong>性能:</strong> 中等规模场景 &lt;100ms。</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-green-400">改进的 LaCAM2</h5>
+                            <p class="text-sm text-gray-400">启发式搜索结合交通管制，适用于大规模实时部署。<br><strong>性能:</strong> 初始解 &lt;500ms。</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                            <h5 class="font-bold text-yellow-400">CLrp (私有)</h5>
+                            <p class="text-sm text-gray-400">极速响应，适用于任务频繁变化的动态环境。<br><strong>性能:</strong> 每次规划 10-100ms。</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-2xl font-semibold mb-3 text-blue-400">资源分配算法</h4>
+                     <p class="text-gray-400">基于时间窗的灵活分配，采用基于优先级和时间的最佳匹配算法。应用于充电、工作站和存储库位分配。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Functions Section -->
+        <section id="features" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">业务功能</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">仓库管理</h4>
+                    <p class="text-gray-400">自动化的入库、出库、盘点和双工位流程。</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">QuickPick 场景</h4>
+                    <p class="text-gray-400">货到人拣选、智能AGV调度和动态补货。</p>
+                </div>
+                 <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">设备管理</h4>
+                    <p class="text-gray-400">统一接入、状态监控、故障诊断和远程控制。</p>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">可视化与监控</h4>
+                    <p class="text-gray-400">2D/3D地图、任务看板、数据分析和多级告警中心。</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Technical Highlights & Competitive Advantages -->
+        <section id="advantages" class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">关键差异化</h3>
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h4 class="text-2xl font-bold text-center mb-6 text-white">技术亮点</h4>
+                    <div class="space-y-6">
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">智能多算法选择</h5>
+                            <p class="text-gray-400">根据业务需求精确匹配算法，平衡性能与路径质量。</p>
+                        </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">极致可扩展性</h5>
+                            <p class="text-gray-400">开放生态系统设计，便于设备、场景和系统集成。</p>
+                        </div>
+                         <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">流程驱动的任务编排</h5>
+                            <p class="text-gray-400">通过低代码、可视化的工作流设计器实现智能自动化。</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold text-center mb-6 text-white">竞争优势</h4>
+                     <div class="space-y-6">
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">算法领先</h5>
+                            <p class="text-gray-400">私有及改进算法提供卓越的性能和适用性。</p>
+                        </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">灵活部署</h5>
+                            <p class="text-gray-400">支持公有云、私有云和本地部署。</p>
+                        </div>
+                         <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">成本优势</h5>
+                            <p class="text-gray-400">模块化设计降低实施和维护成本。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Conclusion -->
+        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg">
+            <h3 class="text-3xl font-bold mb-4">结论</h3>
+            <p class="max-w-4xl mx-auto text-gray-400">
+                Open DCS 是新一代开放式设备控制系统，为智能制造和智慧物流提供一站式解决方案。凭借其核心优势——智能算法选择、极致可扩展性和流程驱动的任务编排——它解决了关键行业痛点，具有巨大的市场潜力和投资价值。
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 mt-16 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 Open DCS. 版权所有。</p>
+            <p class="text-sm mt-2">开创工业自动化的未来。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html> 
