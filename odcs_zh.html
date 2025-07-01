@@ -177,8 +177,8 @@
                     <p class="text-gray-400">基于工作流的任务编排，提供可视化流程设计器。</p>
                 </div>
                 <div class="section-card p-6 rounded-lg">
-                    <h4 class="text-xl font-semibold mb-2 text-blue-400">高可用架构</h4>
-                    <p class="text-gray-400">分布式系统支持水平扩展，并提供全面的监控。</p>
+                    <h4 class="text-xl font-semibold mb-2 text-blue-400">开放生态</h4>
+                    <p class="text-gray-400">模块化架构支持快速扩展，并提供全面的监控。</p>
                 </div>
             </div>
         </section>
@@ -257,15 +257,15 @@
                             <li><strong>框架:</strong> Vue 3 + TypeScript</li>
                             <li><strong>UI:</strong> Element Plus</li>
                             <li><strong>构建工具:</strong> Vite</li>
-                            <li><strong>可视化:</strong> Canvas 2D, Three.js</li>
+                            <li><strong>可视化:</strong> Canvas 2D</li>
                         </ul>
                     </details>
                      <details class="tech-stack-details p-4">
                         <summary class="font-semibold cursor-pointer">算法实现</summary>
                          <ul class="mt-2 list-disc list-inside text-gray-300">
                             <li><strong>语言:</strong> Java + Kotlin</li>
-                            <li><strong>并发:</strong> Kotlin 协程</li>
                             <li><strong>数据结构:</strong> 优先队列, 冲突树</li>
+                            <li><strong>性能优化:</strong> 多线程并行计算</li>
                         </ul>
                     </details>
                 </div>
@@ -282,21 +282,21 @@
                     <div class="grid md:grid-cols-3 gap-4">
                         <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
                             <h5 class="font-bold text-blue-400">CBS (基于冲突的搜索)</h5>
-                            <p class="text-sm text-gray-400">保证最优解，适用于对路径质量要求高的场景。<br><strong>性能:</strong> 中等规模场景 &lt;100ms。</p>
+                            <p class="text-sm text-gray-400">适合小范围、交通冲突极度敏感的规划场景，规划效果最优。<br><strong>性能:</strong> 20个机器人约5秒。</p>
                         </div>
                         <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
                             <h5 class="font-bold text-green-400">改进的 LaCAM2</h5>
-                            <p class="text-sm text-gray-400">启发式搜索结合交通管制，适用于大规模实时部署。<br><strong>性能:</strong> 初始解 &lt;500ms。</p>
+                            <p class="text-sm text-gray-400">适合中等范围、业务相对固定的场景，规划效果随计算时间增加而优化。<br><strong>性能:</strong> 300个机器人最快1秒。</p>
                         </div>
                         <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
                             <h5 class="font-bold text-yellow-400">CLrp (私有)</h5>
-                            <p class="text-sm text-gray-400">极速响应，适用于任务频繁变化的动态环境。<br><strong>性能:</strong> 每次规划 10-100ms。</p>
+                            <p class="text-sm text-gray-400">灵活性最好，适合中大业务范围、业务变动大的场景，支持增量计算。<br><strong>性能:</strong> 300个机器人约1.5秒。</p>
                         </div>
                     </div>
                 </div>
                  <div class="section-card p-6 rounded-lg">
                     <h4 class="text-2xl font-semibold mb-3 text-blue-400">资源分配算法</h4>
-                     <p class="text-gray-400">基于时间窗的灵活分配，采用基于优先级和时间的最佳匹配算法。应用于充电、工作站和存储库位分配。</p>
+                     <p class="text-gray-400">基于时间窗的灵活分配，采用基于优先级和时间的最佳匹配算法。应用于充电、工作站和存储库位分配。<br><strong>性能:</strong> 分配1000个任务约1秒。</p>
                 </div>
             </div>
         </section>
@@ -315,11 +315,46 @@
                 </div>
                  <div class="section-card p-6 rounded-lg">
                     <h4 class="text-xl font-semibold mb-2 text-blue-400">设备管理</h4>
-                    <p class="text-gray-400">统一接入、状态监控、故障诊断和远程控制。</p>
+                    <p class="text-gray-400">统一接入、状态监控、故障诊断和远程控制。同时提供灵活的设备仿真接口，支持开发测试阶段的虚拟设备调试。</p>
                 </div>
                 <div class="section-card p-6 rounded-lg">
                     <h4 class="text-xl font-semibold mb-2 text-blue-400">可视化与监控</h4>
-                    <p class="text-gray-400">2D/3D地图、任务看板、数据分析和多级告警中心。</p>
+                    <p class="text-gray-400">2D地图、任务看板、实时监控和多级告警中心。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Flexibility Section -->
+        <section class="py-16">
+            <h3 class="text-3xl font-bold text-center mb-12 text-white">系统灵活性</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-400">快速设备接入</h4>
+                    <p class="text-gray-400 mb-4">标准化设备适配器架构，支持多种通信协议。</p>
+                    <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                        <p class="text-sm text-green-400"><strong>接入新设备：</strong> 从调研到集成测试仅需 3 天</p>
+                    </div>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-400">敏捷场景开发</h4>
+                    <p class="text-gray-400 mb-4">基于工作流的业务场景快速构建能力。</p>
+                    <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                        <p class="text-sm text-green-400"><strong>业务场景开发：</strong> 从调研到集成测试仅需 3 天</p>
+                    </div>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-400">项目快速上线</h4>
+                    <p class="text-gray-400 mb-4">成熟的项目交付流程和仿真优化工具。</p>
+                    <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                        <p class="text-sm text-green-400"><strong>项目上线：</strong> 从需求调研到仿真优化仅需 10 天</p>
+                    </div>
+                </div>
+                <div class="section-card p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-400">流程实时变更</h4>
+                    <p class="text-gray-400 mb-4">支持业务流程的动态调整和热更新。</p>
+                    <div class="bg-gray-800 p-4 rounded-md border border-gray-700">
+                        <p class="text-sm text-green-400"><strong>流程变更：</strong> 满足 T+1 天的交付要求</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -343,6 +378,10 @@
                             <h5 class="font-bold text-lg text-blue-400">流程驱动的任务编排</h5>
                             <p class="text-gray-400">通过低代码、可视化的工作流设计器实现智能自动化。</p>
                         </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">极速适配能力</h5>
+                            <p class="text-gray-400">新设备接入3天完成，业务场景开发3天完成，项目上线10天完成，流程变更T+1交付。</p>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -359,6 +398,10 @@
                          <div class="section-card p-5 rounded-lg">
                             <h5 class="font-bold text-lg text-blue-400">成本优势</h5>
                             <p class="text-gray-400">模块化设计降低实施和维护成本。</p>
+                        </div>
+                        <div class="section-card p-5 rounded-lg">
+                            <h5 class="font-bold text-lg text-blue-400">快速交付</h5>
+                            <p class="text-gray-400">标准化组件和开放架构确保项目快速上线和迭代。</p>
                         </div>
                     </div>
                 </div>
