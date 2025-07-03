@@ -127,8 +127,15 @@
         .lang-switch {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 30px;
+            width: 50px;
+            height: 26px;
+        }
+        
+        @media (min-width: 768px) {
+            .lang-switch {
+                width: 60px;
+                height: 30px;
+            }
         }
 
         .lang-switch input {
@@ -153,13 +160,21 @@
         .lang-slider:before {
             position: absolute;
             content: "";
-            height: 22px;
-            width: 22px;
-            left: 4px;
+            height: 18px;
+            width: 18px;
+            left: 3px;
             bottom: 3px;
             background-color: white;
             transition: .4s;
             border-radius: 50%;
+        }
+        
+        @media (min-width: 768px) {
+            .lang-slider:before {
+                height: 22px;
+                width: 22px;
+                left: 4px;
+            }
         }
 
         input:checked + .lang-slider {
@@ -167,7 +182,13 @@
         }
 
         input:checked + .lang-slider:before {
-            transform: translateX(26px);
+            transform: translateX(22px);
+        }
+        
+        @media (min-width: 768px) {
+            input:checked + .lang-slider:before {
+                transform: translateX(26px);
+            }
         }
 
         .lang-labels {
@@ -215,8 +236,8 @@
 
     <!-- Header & Navigation -->
     <header class="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-md shadow-lg shadow-black/20">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-white">Open DCS</h1>
+        <nav class="container mx-auto px-4 md:px-6 py-2 md:py-3 flex justify-between items-center">
+            <h1 class="text-lg md:text-xl font-bold text-white">Open DCS</h1>
             
             <!-- Chinese Navigation -->
             <div id="nav-zh" class="hidden md:flex space-x-8 lang-content active">
@@ -238,23 +259,23 @@
                 <a href="#roadmap" class="text-gray-400 hover:text-blue-400 transition-colors">Future Development Blueprint</a>
             </div>
 
-            <!-- Language Switch -->
-            <div class="flex items-center space-x-3">
-                <span class="lang-label active" id="label-zh">中文</span>
-                <label class="lang-switch">
-                    <input type="checkbox" id="lang-toggle">
-                    <span class="lang-slider"></span>
-                </label>
-                <span class="lang-label" id="label-en">English</span>
-            </div>
+                    <!-- Language Switch -->
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <span class="lang-label active text-sm md:text-base" id="label-zh">中文</span>
+            <label class="lang-switch">
+                <input type="checkbox" id="lang-toggle">
+                <span class="lang-slider"></span>
+            </label>
+            <span class="lang-label text-sm md:text-base" id="label-en">EN</span>
+        </div>
             
-            <button id="mobile-menu-button" class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="hidden">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
         
         <!-- Mobile Menu Chinese -->
-        <div id="mobile-menu-zh" class="hidden md:hidden px-6 pt-2 pb-4 lang-content active">
+        <div id="mobile-menu-zh" class="hidden">
             <a href="#overview" class="block py-2 text-gray-400 hover:text-blue-400">概览</a>
             <a href="#architecture" class="block py-2 text-gray-400 hover:text-blue-400">技术架构</a>
             <a href="#algorithms" class="block py-2 text-gray-400 hover:text-blue-400">核心算法</a>
@@ -264,7 +285,7 @@
         </div>
         
         <!-- Mobile Menu English -->
-        <div id="mobile-menu-en" class="hidden md:hidden px-6 pt-2 pb-4 lang-content">
+        <div id="mobile-menu-en" class="hidden">
             <a href="#overview" class="block py-2 text-gray-400 hover:text-blue-400">Overview</a>
             <a href="#architecture" class="block py-2 text-gray-400 hover:text-blue-400">Architecture</a>
             <a href="#algorithms" class="block py-2 text-gray-400 hover:text-blue-400">Algorithms</a>
