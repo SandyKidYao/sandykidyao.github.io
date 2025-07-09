@@ -240,7 +240,7 @@
             <h1 class="text-lg md:text-xl font-bold text-white">AuraLink</h1>
             
             <!-- Chinese Navigation -->
-            <div id="nav-zh" class="hidden md:flex space-x-8 lang-content active">
+            <div id="nav-zh" class="hidden md:flex space-x-8 lang-content">
                 <a href="#overview" class="text-gray-400 hover:text-blue-400 transition-colors">概览</a>
                 <a href="#architecture" class="text-gray-400 hover:text-blue-400 transition-colors">技术架构</a>
                 <a href="#algorithms" class="text-gray-400 hover:text-blue-400 transition-colors">核心算法</a>
@@ -250,7 +250,7 @@
             </div>
             
             <!-- English Navigation -->
-            <div id="nav-en" class="hidden md:flex space-x-8 lang-content">
+            <div id="nav-en" class="hidden md:flex space-x-8 lang-content active">
                 <a href="#overview" class="text-gray-400 hover:text-blue-400 transition-colors">Overview</a>
                 <a href="#architecture" class="text-gray-400 hover:text-blue-400 transition-colors">Architecture</a>
                 <a href="#algorithms" class="text-gray-400 hover:text-blue-400 transition-colors">Algorithms</a>
@@ -261,12 +261,12 @@
 
                     <!-- Language Switch -->
         <div class="flex items-center space-x-2 md:space-x-3">
-            <span class="lang-label active text-sm md:text-base" id="label-zh">中文</span>
+            <span class="lang-label text-sm md:text-base" id="label-zh">中文</span>
             <label class="lang-switch">
-                <input type="checkbox" id="lang-toggle">
+                <input type="checkbox" id="lang-toggle" checked>
                 <span class="lang-slider"></span>
             </label>
-            <span class="lang-label text-sm md:text-base" id="label-en">EN</span>
+            <span class="lang-label active text-sm md:text-base" id="label-en">EN</span>
         </div>
             
             <button id="mobile-menu-button" class="hidden">
@@ -299,21 +299,21 @@
     <main class="container mx-auto p-4 md:p-8">
 
         <!-- Hero Section Chinese -->
-        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700 lang-content content-zh active">
+        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700 lang-content content-zh">
             <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">AuraLink</h2>
             <p class="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">智慧设备协调系统 - 连接智能制造与智慧物流的未来</p>
             <p class="mt-8 text-lg text-gray-500 max-w-4xl mx-auto">聚焦多智能体路径规划、任务调度、设备管理等核心挑战，提供灵活、高效、可扩展的自动化解决方案。</p>
         </section>
 
         <!-- Hero Section English -->
-        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700 lang-content content-en">
+        <section class="text-center py-24 md:py-32 hero-bg rounded-xl border border-gray-700 lang-content content-en active">
             <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">AuraLink</h2>
             <p class="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto">Intelligent Device Coordination System - Connecting the Future of Smart Manufacturing and Logistics</p>
             <p class="mt-8 text-lg text-gray-500 max-w-4xl mx-auto">Focusing on core challenges like multi-agent pathfinding, task scheduling, and device management to deliver flexible, efficient, and scalable automation solutions.</p>
         </section>
 
         <!-- Core Value Section Chinese -->
-        <section id="overview" class="py-16 lang-content content-zh active">
+        <section id="overview" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">核心价值</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -336,7 +336,7 @@
         </section>
 
         <!-- Core Value Section English -->
-        <section id="overview" class="py-16 lang-content content-en">
+        <section id="overview" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Core Value</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -359,7 +359,7 @@
         </section>
 
         <!-- Technical Architecture Section Chinese -->
-        <section id="architecture" class="py-16 lang-content content-zh active">
+        <section id="architecture" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">技术架构</h3>
             <div class="flex flex-col lg:flex-row gap-8 items-start">
                 <div class="w-full lg:w-3/5">
@@ -448,7 +448,7 @@
         </section>
 
         <!-- Technical Architecture Section English -->
-        <section id="architecture" class="py-16 lang-content content-en">
+        <section id="architecture" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Technical Architecture</h3>
             <div class="flex flex-col lg:flex-row gap-8 items-start">
                 <div class="w-full lg:w-3/5">
@@ -537,7 +537,7 @@
         </section>
 
         <!-- Core Algorithms Section Chinese -->
-        <section id="algorithms" class="py-16 lang-content content-zh active">
+        <section id="algorithms" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">核心算法</h3>
             <div class="space-y-8">
                 <div class="section-card p-6 rounded-lg">
@@ -566,7 +566,7 @@
         </section>
 
         <!-- Core Algorithms Section English -->
-        <section id="algorithms" class="py-16 lang-content content-en">
+        <section id="algorithms" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Core Algorithms</h3>
             <div class="space-y-8">
                 <div class="section-card p-6 rounded-lg">
@@ -595,7 +595,7 @@
         </section>
 
         <!-- Business Functions Section Chinese -->
-        <section id="features" class="py-16 lang-content content-zh active">
+        <section id="features" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">业务功能</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -618,7 +618,7 @@
         </section>
 
         <!-- Business Functions Section English -->
-        <section id="features" class="py-16 lang-content content-en">
+        <section id="features" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Business Functions</h3>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -641,7 +641,7 @@
         </section>
 
         <!-- System Flexibility Section Chinese -->
-        <section class="py-16 lang-content content-zh active">
+        <section class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">系统灵活性</h3>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -676,7 +676,7 @@
         </section>
 
         <!-- System Flexibility Section English -->
-        <section class="py-16 lang-content content-en">
+        <section class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">System Flexibility</h3>
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="section-card p-6 rounded-lg">
@@ -711,7 +711,7 @@
         </section>
 
         <!-- Technical Highlights & Competitive Advantages Chinese -->
-        <section id="advantages" class="py-16 lang-content content-zh active">
+        <section id="advantages" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">关键差异化</h3>
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <div>
@@ -760,7 +760,7 @@
         </section>
 
         <!-- Technical Highlights & Competitive Advantages English -->
-        <section id="advantages" class="py-16 lang-content content-en">
+        <section id="advantages" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Key Differentiators</h3>
             <div class="grid lg:grid-cols-2 gap-12 items-start">
                 <div>
@@ -809,7 +809,7 @@
         </section>
 
         <!-- Future Development Blueprint Section Chinese -->
-        <section id="roadmap" class="py-16 lang-content content-zh active">
+        <section id="roadmap" class="py-16 lang-content content-zh">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">未来发展蓝图</h3>
             <div class="space-y-8">
                 <div class="section-card p-6 rounded-lg">
@@ -837,7 +837,7 @@
         </section>
 
         <!-- Future Development Blueprint Section English -->
-        <section id="roadmap" class="py-16 lang-content content-en">
+        <section id="roadmap" class="py-16 lang-content content-en active">
             <h3 class="text-3xl font-bold text-center mb-12 text-white">Future Development Blueprint</h3>
             <div class="space-y-8">
                 <div class="section-card p-6 rounded-lg">
@@ -865,7 +865,7 @@
         </section>
 
         <!-- Conclusion Chinese -->
-        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg lang-content content-zh active">
+        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg lang-content content-zh">
             <h3 class="text-3xl font-bold mb-4">结论</h3>
             <p class="max-w-4xl mx-auto text-gray-400">
                 AuraLink 是新一代智慧设备协调系统，为智能制造和智慧物流提供一站式解决方案。凭借其核心优势——智能算法选择、极致可扩展性和流程驱动的任务编排——它解决了关键行业痛点，具有巨大的市场潜力和投资价值。
@@ -873,7 +873,7 @@
         </section>
 
         <!-- Conclusion English -->
-        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg lang-content content-en">
+        <section class="py-16 text-center bg-gray-800/50 border border-gray-700 text-white rounded-lg lang-content content-en active">
             <h3 class="text-3xl font-bold mb-4">Conclusion</h3>
             <p class="max-w-4xl mx-auto text-gray-400">
                 AuraLink is a next-generation intelligent device coordination system providing a one-stop solution for smart manufacturing and logistics. With its core advantages—intelligent algorithm selection, extreme extensibility, and process-driven task orchestration—it addresses key industry pain points, offering significant market potential and investment value.
@@ -885,10 +885,10 @@
     <!-- Footer -->
     <footer class="bg-gray-900 mt-16 border-t border-gray-800">
         <div class="container mx-auto px-6 py-8 text-center text-gray-500">
-            <p id="footer-zh" class="lang-content active">&copy; 2025 AuraLink. 版权所有.</p>
-            <p id="footer-en" class="lang-content">&copy; 2025 AuraLink. All rights reserved.</p>
-            <p id="footer-subtitle-zh" class="text-sm mt-2 lang-content active">开创工业自动化的未来。</p>
-            <p id="footer-subtitle-en" class="text-sm mt-2 lang-content">Pioneering the future of industrial automation.</p>
+            <p id="footer-zh" class="lang-content">&copy; 2025 AuraLink. 版权所有.</p>
+            <p id="footer-en" class="lang-content active">&copy; 2025 AuraLink. All rights reserved.</p>
+            <p id="footer-subtitle-zh" class="text-sm mt-2 lang-content">开创工业自动化的未来。</p>
+            <p id="footer-subtitle-en" class="text-sm mt-2 lang-content active">Pioneering the future of industrial automation.</p>
         </div>
     </footer>
 
@@ -903,8 +903,8 @@
         const mobileMenuZh = document.getElementById('mobile-menu-zh');
         const mobileMenuEn = document.getElementById('mobile-menu-en');
 
-        // Default language is Chinese
-        let currentLang = 'zh';
+        // Default language is English
+        let currentLang = 'en';
         
         // Initialize language display
         function initLanguage() {
