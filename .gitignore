@@ -1,0 +1,12 @@
+# IDE Folders
+.idea/
+.vscode/
+.cursor/
+
+# Hugo
+.hugo_build.lock
+public/
+resources/_gen/
+
+# Others
+.DS_Store

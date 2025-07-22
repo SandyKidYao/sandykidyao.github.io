@@ -1,0 +1,30 @@
+baseURL = 'https://sandykidyao.github.io'
+languageCode = 'en-us'
+title = 'Yp`s Blog'
+theme = "paper"
+
+[params]
+  # 作者信息
+  author = "Yupeng Yao"
+  # 首页描述
+  description = "Blogs and posters from yp"
+  # 是否显示阅读时间
+  readingTime = true
+  # 代码高亮主题
+  highlightStyle = "github"
+
+# 导航菜单
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  name = "Demos"
+  url = "/demos/"
+  weight = 3
