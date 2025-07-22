@@ -3,6 +3,11 @@ languageCode = 'en-us'
 title = 'Yp`s Blog'
 theme = "paper"
 
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+
 [params]
   # 作者信息
   author = "Yupeng Yao"
