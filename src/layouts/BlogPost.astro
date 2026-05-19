@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, tags = [] } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={title} description={description} image={heroImage} />
+	</head>
+
+	<body>
+		<Header />
+
+		<main>
+			<article>
+				<header class="post-head wrap rise rise-1">
+					<p class="meta tnum">
+						<FormattedDate date={pubDate} />
+						{tags.length > 0 && (
+							<>
+								<span class="dot">·</span>
+								{tags.map((t, i) => (
+									<>
+										{i > 0 && <span class="dot">·</span>}
+										<span class="tag-inline">{t}</span>
+									</>
+								))}
+							</>
+						)}
+					</p>
+					<h1 class="post-title">{title}</h1>
+					{description && <p class="post-lede">{description}</p>}
+					{updatedDate && (
+						<p class="updated">
+							Updated&nbsp;<FormattedDate date={updatedDate} />
+						</p>
+					)}
+				</header>
+
+				{heroImage && (
+					<figure class="hero wrap-wide rise rise-2">
+						<Image width={1200} height={600} src={heroImage} alt="" />
+					</figure>
+				)}
+
+				<div class="prose wrap rise rise-3">
+					<slot />
+				</div>
+
+				<footer class="post-foot wrap">
+					<hr />
+					<p class="back">
+						<a href="/blog" class="no-underline"><span class="sym">←</span>&nbsp; All writing</a>
+					</p>
+				</footer>
+			</article>
+		</main>
+
+		<Footer />
+
+		<style>
+			.post-head {
+				padding-block: clamp(3rem, 7vw, 5rem) 2rem;
+			}
+			.meta {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--ink-3);
+				letter-spacing: 0.04em;
+				margin: 0 0 1.2rem;
+			}
+			.tag-inline {
+				font-family: var(--font-display);
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--ink-3);
+			}
+			.post-title {
+				font-family: var(--font-display);
+				font-weight: 600;
+				font-size: clamp(1.9rem, 4.6vw, 2.8rem);
+				line-height: 1.18;
+				letter-spacing: -0.018em;
+				color: var(--ink);
+				margin: 0 0 1.2rem;
+			}
+			.post-lede {
+				font-family: var(--font-body);
+				font-style: italic;
+				font-size: 1.1rem;
+				color: var(--ink-2);
+				line-height: 1.55;
+				margin: 0;
+				max-width: 34rem;
+				font-variation-settings: 'opsz' 32, 'SOFT' 100;
+			}
+			.updated {
+				margin-top: 0.6rem;
+				font-family: var(--font-mono);
+				font-size: 0.76rem;
+				color: var(--ink-4);
+			}
+
+			.hero {
+				margin: 1rem auto 2.5rem;
+			}
+			.hero :global(img) {
+				border-radius: 4px;
+				border: 1px solid var(--rule);
+			}
+
+			.prose {
+				font-family: var(--font-body);
+				font-size: 1.05rem;
+				line-height: 1.75;
+				color: var(--ink-2);
+				font-variation-settings: 'opsz' 14, 'SOFT' 30;
+			}
+			.prose :global(h2) {
+				font-family: var(--font-display);
+				font-size: 1.55rem;
+				font-weight: 600;
+				color: var(--ink);
+				margin: 2.4em 0 0.6em;
+				letter-spacing: -0.01em;
+			}
+			.prose :global(h2)::before {
+				content: '⌗ ';
+				color: var(--accent);
+				font-weight: 500;
+			}
+			.prose :global(h3) {
+				font-family: var(--font-display);
+				font-size: 1.18rem;
+				font-weight: 500;
+				color: var(--ink);
+				margin: 1.8em 0 0.5em;
+			}
+			.prose :global(p) { margin: 0 0 1.1em; color: var(--ink-2); }
+			.prose :global(strong) { color: var(--ink); }
+			.prose :global(li) { color: var(--ink-2); }
+
+			.prose :global(img) {
+				border-radius: 4px;
+				border: 1px solid var(--rule);
+				margin: 1.6em 0;
+			}
+
+			.post-foot { margin-top: 4rem; }
+			.post-foot .back {
+				font-family: var(--font-display);
+				color: var(--ink-3);
+				margin: 1rem 0 0;
+			}
+			.post-foot .back a { color: var(--ink-3); background-image: none; }
+			.post-foot .back a:hover { color: var(--accent); }
+		</style>
+	</body>
+</html>

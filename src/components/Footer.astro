@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="wrap-wide row">
+		<span class="meta">
+			<span class="sym">✦</span>
+			&nbsp;©&nbsp;{year}&nbsp;SandyKid
+		</span>
+		<span class="meta links">
+			<a class="no-underline" href="https://github.com/SandyKidYao" target="_blank" rel="noopener">GitHub&nbsp;<span class="sym">↗</span></a>
+			<span class="dot">·</span>
+			<a class="no-underline" href="/rss.xml">RSS</a>
+		</span>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--rule);
+		padding-block: 2.5rem;
+		margin-top: 6rem;
+	}
+	.row {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		color: var(--ink-3);
+		letter-spacing: 0.02em;
+	}
+	.row a { color: var(--ink-3); transition: color 180ms ease; }
+	.row a:hover { color: var(--accent); }
+	.links { display: inline-flex; align-items: center; }
+</style>

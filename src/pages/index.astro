@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const recent = posts.slice(0, 5);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+
+		<main>
+			<section class="hero wrap-wide">
+				<p class="kicker rise rise-1"><span class="sym">⌗</span>&nbsp; A notebook</p>
+				<h1 class="glyph rise rise-2" aria-label="SK">
+					<span aria-hidden="true">ᕕ(&nbsp;<span class="glyph-eye">ᐛ</span>&nbsp;)ᕗ</span>
+				</h1>
+				<p class="lede rise rise-3">
+					<span class="lede-em">SandyKid</span> &mdash; 在这里写一些关于
+					<em>AI</em>、<em>编程</em>与 <em>游戏</em> 的笔记。
+				</p>
+				<p class="hint rise rise-4">
+					<a href="/blog">阅读全部 &nbsp;<span class="sym">↘</span></a>
+				</p>
+			</section>
+
+			<section class="recent wrap">
+				<header class="section-head">
+					<h2><span class="sym">✦</span>&nbsp; Recent writing</h2>
+				</header>
+				<ol class="post-list">
+					{recent.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`} class="post-row no-underline">
+								<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
+								<span class="post-title">{post.data.title}</span>
+								{post.data.tags?.length > 0 && (
+									<span class="post-tags">
+										{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+									</span>
+								)}
+							</a>
+						</li>
+					))}
+				</ol>
+			</section>
+		</main>
+
+		<Footer />
+
+		<style>
+			.hero {
+				padding-block: clamp(3rem, 9vw, 6rem) clamp(2rem, 6vw, 4rem);
+			}
+			.kicker {
+				font-family: var(--font-display);
+				font-size: 0.85rem;
+				color: var(--ink-3);
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				margin: 0 0 1.6rem;
+			}
+			.glyph {
+				font-family: var(--font-display);
+				font-weight: 600;
+				font-size: clamp(3.4rem, 12vw, 7.5rem);
+				line-height: 0.95;
+				letter-spacing: -0.04em;
+				color: var(--ink);
+				margin: 0 0 1.6rem;
+				word-spacing: -0.1em;
+			}
+			.glyph-eye {
+				color: var(--accent);
+				font-style: italic;
+				font-variation-settings: 'opsz' 144;
+			}
+			.lede {
+				font-family: var(--font-body);
+				font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+				line-height: 1.55;
+				color: var(--ink-2);
+				max-width: 32rem;
+				margin: 0 0 1.5rem;
+				font-variation-settings: 'opsz' 24, 'SOFT' 30;
+			}
+			.lede-em {
+				font-family: var(--font-display);
+				font-weight: 500;
+				color: var(--ink);
+			}
+			.lede em {
+				font-style: italic;
+				color: var(--ink);
+				font-variation-settings: 'opsz' 24, 'SOFT' 100;
+			}
+			.hint {
+				font-family: var(--font-display);
+				font-size: 0.95rem;
+				color: var(--ink-3);
+				margin: 0;
+			}
+			.hint a { color: var(--ink); background-image: none; }
+			.hint a:hover { color: var(--accent); }
+
+			.recent { padding-block: 2rem 1rem; }
+			.section-head h2 {
+				font-family: var(--font-display);
+				font-weight: 500;
+				font-size: 0.9rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--ink-3);
+				margin: 0 0 1.5rem;
+			}
+			.section-head .sym { color: var(--accent); }
+
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				border-top: 1px solid var(--rule);
+			}
+			.post-list li { margin: 0; }
+			.post-row {
+				display: grid;
+				grid-template-columns: 6.5rem 1fr auto;
+				align-items: baseline;
+				gap: 1.2rem;
+				padding-block: 1rem;
+				border-bottom: 1px solid var(--rule);
+				color: var(--ink);
+				transition: padding-left 220ms ease, color 180ms ease;
+			}
+			.post-row:hover { padding-left: 0.4rem; color: var(--accent); }
+			.post-date {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--ink-3);
+				letter-spacing: 0.02em;
+			}
+			.post-title {
+				font-family: var(--font-body);
+				font-size: 1.05rem;
+				font-variation-settings: 'opsz' 18, 'SOFT' 30;
+				line-height: 1.4;
+			}
+			.post-tags { display: inline-flex; gap: 0.4rem; }
+			.tag {
+				font-family: var(--font-display);
+				font-size: 0.72rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--ink-3);
+				border: 1px solid var(--rule);
+				padding: 0.12rem 0.5rem;
+				border-radius: 999px;
+				white-space: nowrap;
+			}
+			@media (max-width: 560px) {
+				.post-row {
+					grid-template-columns: 1fr;
+					gap: 0.35rem;
+				}
+				.post-date { font-size: 0.72rem; }
+				.post-tags { margin-top: 0.2rem; }
+			}
+		</style>
+	</body>
+</html>

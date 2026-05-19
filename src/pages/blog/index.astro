@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Group by year (descending)
+type Post = (typeof posts)[number];
+const groups = posts.reduce<Record<string, Post[]>>((acc, p) => {
+	const y = String(p.data.pubDate.getFullYear());
+	(acc[y] ??= []).push(p);
+	return acc;
+}, {});
+const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={`Writing — ${SITE_TITLE}`} description="所有文章" />
+	</head>
+	<body>
+		<Header />
+
+		<main class="wrap">
+			<header class="page-head rise rise-1">
+				<p class="kicker"><span class="sym">⌗</span>&nbsp; All writing</p>
+				<h1>笔 记</h1>
+				<p class="lede">关于 AI、编程和软件工程的不定期记录。{posts.length} 篇。</p>
+			</header>
+
+			{years.map((year) => (
+				<section class="year-block">
+					<h2 class="year">{year}</h2>
+					<ol class="post-list">
+						{groups[year].map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`} class="post-row no-underline">
+									<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
+									<span class="post-title">{post.data.title}</span>
+									{post.data.tags?.length > 0 && (
+										<span class="post-tags">
+											{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+										</span>
+									)}
+								</a>
+							</li>
+						))}
+					</ol>
+				</section>
+			))}
+		</main>
+
+		<Footer />
+
+		<style>
+			.page-head { padding-block: clamp(3rem, 8vw, 5rem) 2.5rem; }
+			.kicker {
+				font-family: var(--font-display);
+				font-size: 0.85rem;
+				color: var(--ink-3);
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				margin: 0 0 1.2rem;
+			}
+			.page-head h1 {
+				font-family: var(--font-display);
+				font-weight: 600;
+				font-size: clamp(2.6rem, 6vw, 4rem);
+				letter-spacing: -0.02em;
+				margin: 0 0 1rem;
+			}
+			.lede {
+				color: var(--ink-2);
+				max-width: 32rem;
+				font-variation-settings: 'opsz' 22, 'SOFT' 30;
+			}
+
+			.year-block { margin-bottom: 3rem; }
+			.year {
+				font-family: var(--font-mono);
+				font-size: 0.8rem;
+				letter-spacing: 0.18em;
+				color: var(--ink-4);
+				margin: 0 0 0.4rem;
+				font-weight: 400;
+			}
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				border-top: 1px solid var(--rule);
+			}
+			.post-row {
+				display: grid;
+				grid-template-columns: 6.5rem 1fr auto;
+				align-items: baseline;
+				gap: 1.2rem;
+				padding-block: 1.05rem;
+				border-bottom: 1px solid var(--rule);
+				color: var(--ink);
+				transition: padding-left 220ms ease, color 180ms ease;
+			}
+			.post-row:hover { padding-left: 0.4rem; color: var(--accent); }
+			.post-date {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--ink-3);
+			}
+			.post-title {
+				font-family: var(--font-body);
+				font-size: 1.08rem;
+				font-variation-settings: 'opsz' 18, 'SOFT' 30;
+				line-height: 1.4;
+			}
+			.post-tags { display: inline-flex; gap: 0.4rem; }
+			.tag {
+				font-family: var(--font-display);
+				font-size: 0.72rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--ink-3);
+				border: 1px solid var(--rule);
+				padding: 0.12rem 0.5rem;
+				border-radius: 999px;
+				white-space: nowrap;
+			}
+			@media (max-width: 560px) {
+				.post-row {
+					grid-template-columns: 1fr;
+					gap: 0.35rem;
+				}
+				.post-tags { margin-top: 0.2rem; }
+			}
+		</style>
+	</body>
+</html>

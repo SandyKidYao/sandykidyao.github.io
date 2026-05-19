@@ -1,0 +1,19 @@
+---
+interface Props {
+	date: Date;
+	format?: 'long' | 'short' | 'iso';
+}
+
+const { date, format = 'long' } = Astro.props;
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const yyyy = date.getFullYear();
+const mm = String(date.getMonth() + 1).padStart(2, '0');
+const dd = String(date.getDate()).padStart(2, '0');
+
+let label = `${yyyy} · ${months[date.getMonth()]} ${dd}`;
+if (format === 'short') label = `${yyyy}·${mm}·${dd}`;
+if (format === 'iso') label = `${yyyy}-${mm}-${dd}`;
+---
+
+<time class="tnum" datetime={date.toISOString()}>{label}</time>
