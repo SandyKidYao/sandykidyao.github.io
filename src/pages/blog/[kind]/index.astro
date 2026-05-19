@@ -1,0 +1,227 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import { SITE_TITLE } from '../../../consts';
+
+export async function getStaticPaths() {
+	return [
+		{ params: { kind: 'personal' } },
+		{ params: { kind: 'professional' } },
+	];
+}
+
+const { kind } = Astro.params as { kind: 'personal' | 'professional' };
+
+const posts = (await getCollection('blog'))
+	.filter((p) => p.id.split('/')[0] === kind)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+type Post = (typeof posts)[number];
+const groups = posts.reduce<Record<string, Post[]>>((acc, p) => {
+	const y = String(p.data.pubDate.getFullYear());
+	(acc[y] ??= []).push(p);
+	return acc;
+}, {});
+const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+
+const meta =
+	kind === 'personal'
+		? {
+				num: '01',
+				kicker: 'Personal · slow notes',
+				h1: 'Slow notes',
+				empty: '还没开始写。Just vibes for now.',
+			}
+		: {
+				num: '02',
+				kicker: 'Professional · selected writing',
+				h1: 'Selected writing',
+				empty: 'Nothing here yet — soon.',
+			};
+---
+
+<!doctype html>
+<html lang="zh-CN" data-mode={kind}>
+	<head>
+		<BaseHead title={`${meta.h1} — ${SITE_TITLE}`} description={meta.h1} />
+		<!-- Sync stored mode to this page's kind so home stays coherent -->
+		<script is:inline define:vars={{ kind }}>
+			try { localStorage.setItem('sk-mode', kind); } catch (e) { /* noop */ }
+		</script>
+	</head>
+	<body>
+		<Header />
+
+		<main class="wrap">
+			<header class="page-head rise rise-1">
+				<p class="kicker">
+					<span class="num">{meta.num}</span>
+					<span class="sym">⌗</span>&nbsp; {meta.kicker}
+				</p>
+				<h1>{meta.h1}</h1>
+			</header>
+
+			{posts.length === 0 ? (
+				<p class="empty-state">
+					<span class="sym">⌗</span>&nbsp; {meta.empty}
+				</p>
+			) : (
+				years.map((year) => (
+					<section class="year-block">
+						<h2 class="year">{year}</h2>
+						<ol class="post-list">
+							{groups[year].map((post) => (
+								<li>
+									<a href={`/blog/${post.id}/`} class="post-row no-underline">
+										<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
+										<span class="post-title">{post.data.title}</span>
+										{post.data.tags?.length > 0 && (
+											<span class="post-tags">
+												{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+											</span>
+										)}
+									</a>
+								</li>
+							))}
+						</ol>
+					</section>
+				))
+			)}
+
+			<footer class="page-foot rise rise-2">
+				<a class="ghost-link" href="/blog">
+					<span class="sym">←</span>&nbsp; All writing
+				</a>
+				<a
+					class="ghost-link"
+					href={kind === 'personal' ? '/blog/professional/' : '/blog/personal/'}
+				>
+					{kind === 'personal' ? 'Selected writing' : 'Slow notes'}&nbsp;<span class="sym">→</span>
+				</a>
+			</footer>
+		</main>
+
+		<Footer />
+
+		<style>
+			.page-head { padding-block: clamp(3rem, 8vw, 5rem) 2.5rem; }
+			.kicker {
+				display: inline-flex;
+				align-items: baseline;
+				gap: 0.7rem;
+				font-family: var(--font-display);
+				font-size: 0.85rem;
+				color: var(--ink-3);
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				margin: 0 0 1.2rem;
+			}
+			.kicker .num {
+				font-family: var(--font-mono);
+				font-size: 0.7rem;
+				color: var(--accent-ink);
+				letter-spacing: 0.04em;
+				padding: 0.12rem 0.5rem;
+				border: 1px solid var(--accent-soft);
+				border-radius: 999px;
+				background: var(--accent-soft);
+			}
+			.page-head h1 {
+				font-family: var(--font-display);
+				font-weight: 600;
+				font-size: clamp(2.4rem, 6vw, 3.8rem);
+				letter-spacing: -0.02em;
+				margin: 0;
+			}
+
+			.empty-state {
+				font-family: var(--font-mono);
+				font-size: 0.9rem;
+				color: var(--ink-3);
+				padding: 1.4rem 0;
+				margin: 0 0 2rem;
+				border-top: 1px solid var(--rule);
+				border-bottom: 1px solid var(--rule);
+				letter-spacing: 0.02em;
+			}
+			.empty-state .sym { color: var(--accent); }
+
+			.year-block { margin-bottom: 3rem; }
+			.year {
+				font-family: var(--font-mono);
+				font-size: 0.8rem;
+				letter-spacing: 0.18em;
+				color: var(--ink-4);
+				margin: 0 0 0.4rem;
+				font-weight: 400;
+			}
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				border-top: 1px solid var(--rule);
+			}
+			.post-row {
+				display: grid;
+				grid-template-columns: 6.5rem 1fr auto;
+				align-items: baseline;
+				gap: 1.2rem;
+				padding-block: 1.05rem;
+				border-bottom: 1px solid var(--rule);
+				color: var(--ink);
+				transition: padding-left 220ms ease, color 180ms ease;
+			}
+			.post-row:hover { padding-left: 0.4rem; color: var(--accent-ink); }
+			.post-date {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--ink-3);
+			}
+			.post-title {
+				font-family: var(--font-body);
+				font-size: 1.08rem;
+				font-variation-settings: 'opsz' 18, 'SOFT' 50;
+				line-height: 1.4;
+			}
+			.post-tags { display: inline-flex; gap: 0.4rem; }
+			.tag {
+				font-family: var(--font-display);
+				font-size: 0.72rem;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--ink-3);
+				border: 1px solid var(--rule);
+				padding: 0.12rem 0.5rem;
+				border-radius: 999px;
+				white-space: nowrap;
+			}
+
+			.page-foot {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				flex-wrap: wrap;
+				margin-top: 2.5rem;
+				padding-top: 1.4rem;
+				border-top: 1px solid var(--rule);
+			}
+			.ghost-link {
+				font-family: var(--font-display);
+				font-size: 0.9rem;
+				color: var(--ink-3);
+				background-image: none;
+				transition: color 200ms ease;
+			}
+			.ghost-link:hover { color: var(--accent-ink); }
+			.ghost-link .sym { color: var(--accent); }
+
+			@media (max-width: 560px) {
+				.post-row { grid-template-columns: 1fr; gap: 0.35rem; }
+				.post-tags { margin-top: 0.2rem; }
+			}
+		</style>
+	</body>
+</html>

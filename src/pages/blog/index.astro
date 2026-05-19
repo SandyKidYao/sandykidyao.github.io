@@ -21,9 +21,19 @@ const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-mode="personal">
 	<head>
 		<BaseHead title={`Writing — ${SITE_TITLE}`} description="所有文章" />
+		<script is:inline>
+			(function () {
+				try {
+					var m = localStorage.getItem('sk-mode');
+					if (m === 'personal' || m === 'professional') {
+						document.documentElement.setAttribute('data-mode', m);
+					}
+				} catch (e) { /* noop */ }
+			})();
+		</script>
 	</head>
 	<body>
 		<Header />
@@ -32,7 +42,6 @@ const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
 			<header class="page-head rise rise-1">
 				<p class="kicker"><span class="sym">⌗</span>&nbsp; All writing</p>
 				<h1>笔 记</h1>
-				<p class="lede">关于 AI、编程和软件工程的不定期记录。{posts.length} 篇。</p>
 			</header>
 
 			{years.map((year) => (
@@ -74,12 +83,7 @@ const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
 				font-weight: 600;
 				font-size: clamp(2.6rem, 6vw, 4rem);
 				letter-spacing: -0.02em;
-				margin: 0 0 1rem;
-			}
-			.lede {
-				color: var(--ink-2);
-				max-width: 32rem;
-				font-variation-settings: 'opsz' 22, 'SOFT' 30;
+				margin: 0;
 			}
 
 			.year-block { margin-bottom: 3rem; }

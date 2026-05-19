@@ -6,94 +6,344 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const posts = (await getCollection('blog')).sort(
+// Posts are organised on disk by kind: src/content/blog/{personal,professional}/...
+// We derive the kind from the first segment of the post id so frontmatter stays free.
+const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const recent = posts.slice(0, 5);
+const kindOf = (id: string): 'personal' | 'professional' | 'other' => {
+	const seg = id.split('/')[0];
+	return seg === 'personal' || seg === 'professional' ? seg : 'other';
+};
+const recentPersonal     = allPosts.filter((p) => kindOf(p.id) === 'personal').slice(0, 5);
+const recentProfessional = allPosts.filter((p) => kindOf(p.id) === 'professional').slice(0, 5);
+
+const projects = [
+	{
+		name: 'blogbuddy',
+		url: 'https://github.com/FulcrumStd/blogbuddy',
+		description: 'AI 驱动的 Markdown 博客写作助手 — 让 AI 替你打磨每一篇 Markdown。',
+		lang: 'TypeScript',
+	},
+	{
+		name: 'vibeval',
+		url: 'https://github.com/SandyKidYao/vibeval',
+		description: '面向 AI 应用的测试框架（Vibe Coding Eval）。',
+		lang: 'Python',
+	},
+	{
+		name: 'evk',
+		url: 'https://github.com/SandyKidYao/evk',
+		description: 'Local-first CLI，统一管理 shell 配置与 .env 文件中的环境变量。',
+		lang: 'JavaScript',
+	},
+	{
+		name: 'nanopoet',
+		url: 'https://github.com/SandyKidYao/nanopoet',
+		description: '在一台 MacBook 上体验 GPT 风格 LLM 的完整训练流程。',
+		lang: 'Jupyter',
+	},
+];
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-mode="personal">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- Restore mode preference before paint to avoid flash -->
+		<script is:inline>
+			(function () {
+				try {
+					var m = localStorage.getItem('sk-mode');
+					if (m === 'personal' || m === 'professional') {
+						document.documentElement.setAttribute('data-mode', m);
+					}
+				} catch (e) { /* noop */ }
+			})();
+		</script>
 	</head>
 	<body>
 		<Header />
 
 		<main>
 			<section class="hero wrap-wide">
-				<p class="kicker rise rise-1"><span class="sym">⌗</span>&nbsp; A notebook</p>
-				<h1 class="glyph rise rise-2" aria-label="SK">
-					<span aria-hidden="true">ᕕ(&nbsp;<span class="glyph-eye">ᐛ</span>&nbsp;)ᕗ</span>
+				<p class="kicker rise rise-1">
+					<span class="sym">⌗</span>&nbsp; A notebook &amp; a self-portrait
+				</p>
+
+				<h1 class="glyph rise rise-2" aria-label="SandyKid">
+					<span aria-hidden="true">ᕕ(<span class="glyph-eye">ᐛ</span>)ᕗ</span>
 				</h1>
+
 				<p class="lede rise rise-3">
-					<span class="lede-em">SandyKid</span> &mdash; 在这里写一些关于
-					<em>AI</em>、<em>编程</em>与 <em>游戏</em> 的笔记。
+					Hi there, this is <span class="lede-em">SandyKid</span>.
+					May <em>freedom</em> be with you&nbsp;everyday.
 				</p>
-				<p class="hint rise rise-4">
-					<a href="/blog">阅读全部 &nbsp;<span class="sym">↘</span></a>
-				</p>
+
+				<div class="toggle-row rise rise-4" role="group" aria-label="Switch between personal and professional view">
+					<div class="mode-toggle" id="mode-toggle">
+						<span class="indicator" aria-hidden="true"></span>
+						<button type="button" data-target="personal" aria-pressed="true">
+							<span class="num">01</span>
+							<span class="lbl">Personal</span>
+						</button>
+						<button type="button" data-target="professional" aria-pressed="false">
+							<span class="num">02</span>
+							<span class="lbl">Professional</span>
+						</button>
+					</div>
+					<p class="toggle-hint">
+						<span class="sym">↳</span>&nbsp; <span class="hint-text" data-hint="personal">off the clock</span><span class="hint-text" data-hint="professional">on the clock</span>
+					</p>
+				</div>
+			</section>
+
+			<section class="panels wrap-wide rise rise-5" aria-live="polite">
+				<!-- ============ Personal ============ -->
+				<article class="panel" data-panel="personal" aria-labelledby="panel-personal-h">
+					<header class="panel-head">
+						<span class="panel-num">01 — Personal</span>
+						<h2 id="panel-personal-h">
+							一个 <em>慢吞吞</em> 的 thinker.
+						</h2>
+					</header>
+
+					<div class="panel-body">
+						<p>
+							沉迷 <strong>电子游戏</strong>，喜欢 <strong>音乐</strong> 和 <strong>历史</strong>，
+							稍稍懂一点 <strong>乐器</strong>、<strong>插画</strong>、<strong>社会科学</strong> 与 <strong>哲学</strong>。
+						</p>
+					</div>
+
+					<p class="favorites-intro">
+						<span class="sym">↓</span>&nbsp; 这些是我的 <em>心头好</em>，推荐给所有人。
+					</p>
+
+					<dl class="now-block">
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Games</dt>
+							<dd>泰拉瑞亚、血源诅咒、极限竞速地平线、以撒的结合</dd>
+						</div>
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Books</dt>
+							<dd>如何阅读一本书、毛泽东选集、贫穷的本质、小王子</dd>
+						</div>
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Music</dt>
+							<dd>汉斯·季默、查理·普斯、周杰伦、目黑將司</dd>
+						</div>
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Screen</dt>
+							<dd>诺兰、宁浩、憨豆、京阿尼、漫威、武林外传</dd>
+						</div>
+					</dl>
+
+					<footer class="panel-foot">
+						<a class="ghost-link" href="/blog/personal/">
+							Slow notes&nbsp;&nbsp;<span class="sym">→</span>
+						</a>
+					</footer>
+				</article>
+
+				<!-- ============ Professional ============ -->
+				<article class="panel" data-panel="professional" aria-labelledby="panel-pro-h">
+					<header class="panel-head">
+						<span class="panel-num">02 — Professional</span>
+						<h2 id="panel-pro-h">
+							Software Engineer &mdash; currently working on <em>AI agents</em>.
+						</h2>
+					</header>
+
+					<div class="panel-body">
+						<p>
+							做过 <strong>机器人调度系统</strong>、<strong>导航算法</strong>、<strong>视觉模型</strong>；
+							作为 <strong>技术合伙人</strong> 创过业。
+						</p>
+						<p>
+							现在在做 <em>AI Agent</em>。
+						</p>
+					</div>
+
+					<dl class="now-block">
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Currently</dt>
+							<dd>AI Agent 开发</dd>
+						</div>
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Based</dt>
+							<dd>Shanghai</dd>
+						</div>
+						<div class="now-row">
+							<dt><span class="sym">✦</span> Education</dt>
+							<dd>MSc, Manchester · BEng, HIT</dd>
+						</div>
+					</dl>
+
+					<footer class="panel-foot">
+						<a class="ghost-link" href="https://github.com/SandyKidYao" target="_blank" rel="noopener">
+							GitHub&nbsp;&nbsp;<span class="sym">↗</span>
+						</a>
+						<a class="ghost-link" href="/blog/professional/">
+							Selected writing&nbsp;&nbsp;<span class="sym">→</span>
+						</a>
+					</footer>
+				</article>
+			</section>
+
+			<section class="projects wrap-wide">
+				<header class="section-head">
+					<h2><span class="sym">✦</span>&nbsp; Open source</h2>
+					<a class="section-link" href="https://github.com/SandyKidYao" target="_blank" rel="noopener">
+						All repos&nbsp;<span class="sym">↗</span>
+					</a>
+				</header>
+				<ul class="project-grid">
+					{projects.map((p) => (
+						<li>
+							<a class="project-card no-underline" href={p.url} target="_blank" rel="noopener">
+								<div class="card-head">
+									<h3 class="card-name">{p.name}</h3>
+									<span class="card-arr" aria-hidden="true">↗</span>
+								</div>
+								<p class="card-desc">{p.description}</p>
+								<span class="card-lang"><span class="card-lang-dot" aria-hidden="true"></span>{p.lang}</span>
+							</a>
+						</li>
+					))}
+				</ul>
 			</section>
 
 			<section class="recent wrap">
 				<header class="section-head">
 					<h2><span class="sym">✦</span>&nbsp; Recent writing</h2>
 				</header>
-				<ol class="post-list">
-					{recent.map((post) => (
-						<li>
-							<a href={`/blog/${post.id}/`} class="post-row no-underline">
-								<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
-								<span class="post-title">{post.data.title}</span>
-								{post.data.tags?.length > 0 && (
-									<span class="post-tags">
-										{post.data.tags.map((t) => <span class="tag">{t}</span>)}
-									</span>
-								)}
-							</a>
-						</li>
-					))}
-				</ol>
+
+				{/* Personal list */}
+				<div class="recent-bucket" data-bucket="personal">
+					{recentPersonal.length > 0 ? (
+						<ol class="post-list">
+							{recentPersonal.map((post) => (
+								<li>
+									<a href={`/blog/${post.id}/`} class="post-row no-underline">
+										<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
+										<span class="post-title">{post.data.title}</span>
+										{post.data.tags?.length > 0 && (
+											<span class="post-tags">
+												{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+											</span>
+										)}
+									</a>
+								</li>
+							))}
+						</ol>
+					) : (
+						<p class="recent-empty">
+							<span class="sym">⌗</span>&nbsp; No notes yet. Just vibes.
+						</p>
+					)}
+				</div>
+
+				{/* Professional list */}
+				<div class="recent-bucket" data-bucket="professional">
+					{recentProfessional.length > 0 ? (
+						<ol class="post-list">
+							{recentProfessional.map((post) => (
+								<li>
+									<a href={`/blog/${post.id}/`} class="post-row no-underline">
+										<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
+										<span class="post-title">{post.data.title}</span>
+										{post.data.tags?.length > 0 && (
+											<span class="post-tags">
+												{post.data.tags.map((t) => <span class="tag">{t}</span>)}
+											</span>
+										)}
+									</a>
+								</li>
+							))}
+						</ol>
+					) : (
+						<p class="recent-empty">
+							<span class="sym">⌗</span>&nbsp; Nothing here yet.
+						</p>
+					)}
+				</div>
 			</section>
 		</main>
 
 		<Footer />
 
+		<script is:inline>
+			(function () {
+				var root = document.documentElement;
+				var toggle = document.getElementById('mode-toggle');
+				if (!toggle) return;
+				var buttons = toggle.querySelectorAll('button[data-target]');
+
+				function apply(mode) {
+					root.setAttribute('data-mode', mode);
+					buttons.forEach(function (b) {
+						b.setAttribute('aria-pressed', b.getAttribute('data-target') === mode ? 'true' : 'false');
+					});
+					try { localStorage.setItem('sk-mode', mode); } catch (e) {}
+				}
+
+				// Reconcile button state in case the inline boot script chose a different mode.
+				apply(root.getAttribute('data-mode') || 'personal');
+
+				buttons.forEach(function (btn) {
+					btn.addEventListener('click', function () {
+						apply(btn.getAttribute('data-target'));
+					});
+				});
+
+				// Keyboard: left/right arrows step through modes
+				toggle.addEventListener('keydown', function (e) {
+					if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+					var current = root.getAttribute('data-mode') || 'personal';
+					apply(current === 'personal' ? 'professional' : 'personal');
+				});
+			})();
+		</script>
+
 		<style>
+			/* ----- Hero ----- */
 			.hero {
-				padding-block: clamp(3rem, 9vw, 6rem) clamp(2rem, 6vw, 4rem);
+				padding-block: clamp(3rem, 9vw, 6rem) clamp(1.5rem, 4vw, 2.5rem);
 			}
 			.kicker {
 				font-family: var(--font-display);
-				font-size: 0.85rem;
+				font-size: 0.82rem;
 				color: var(--ink-3);
-				letter-spacing: 0.16em;
+				letter-spacing: 0.18em;
 				text-transform: uppercase;
 				margin: 0 0 1.6rem;
 			}
+			.kicker .sym { color: var(--accent); }
 			.glyph {
 				font-family: var(--font-display);
 				font-weight: 600;
-				font-size: clamp(3.4rem, 12vw, 7.5rem);
+				font-size: clamp(2.8rem, 10vw, 6.4rem);
 				line-height: 0.95;
-				letter-spacing: -0.04em;
+				letter-spacing: -0.02em;
 				color: var(--ink);
-				margin: 0 0 1.6rem;
-				word-spacing: -0.1em;
+				margin: 0 0 1.4rem;
 			}
 			.glyph-eye {
+				display: inline-block;
 				color: var(--accent);
-				font-style: italic;
-				font-variation-settings: 'opsz' 144;
+				margin: 0 0.22em;
+				transform-origin: center;
+				animation: blink 6s var(--ease-soft) infinite;
+				transition: color 400ms var(--ease-soft);
 			}
 			.lede {
 				font-family: var(--font-body);
-				font-size: clamp(1.05rem, 1.6vw, 1.2rem);
-				line-height: 1.55;
+				font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+				line-height: 1.6;
 				color: var(--ink-2);
-				max-width: 32rem;
-				margin: 0 0 1.5rem;
-				font-variation-settings: 'opsz' 24, 'SOFT' 30;
+				max-width: 36rem;
+				margin: 0 0 2.2rem;
+				font-variation-settings: 'opsz' 24, 'SOFT' 60;
 			}
 			.lede-em {
 				font-family: var(--font-display);
@@ -102,19 +352,295 @@ const recent = posts.slice(0, 5);
 			}
 			.lede em {
 				font-style: italic;
-				color: var(--ink);
+				color: var(--accent-ink);
 				font-variation-settings: 'opsz' 24, 'SOFT' 100;
+				transition: color 400ms var(--ease-soft);
 			}
-			.hint {
+
+			/* ----- Toggle ----- */
+			.toggle-row {
+				display: flex;
+				align-items: center;
+				gap: 1.1rem;
+				flex-wrap: wrap;
+			}
+			.mode-toggle {
+				position: relative;
+				display: inline-flex;
+				padding: 4px;
+				border-radius: 999px;
+				border: 1px solid transparent;
+				background:
+					linear-gradient(var(--paper), var(--paper)) padding-box,
+					linear-gradient(135deg, var(--accent-personal-soft), var(--accent-pro-soft)) border-box;
+				box-shadow:
+					0 1px 0 rgba(255,255,255,0.6) inset,
+					0 8px 20px -16px rgba(44, 40, 34, 0.35);
+			}
+			.mode-toggle .indicator {
+				position: absolute;
+				top: 4px;
+				bottom: 4px;
+				left: 4px;
+				width: calc(50% - 4px);
+				background: var(--accent);
+				border-radius: 999px;
+				transition: transform 420ms var(--ease-soft), background-color 420ms var(--ease-soft);
+				z-index: 0;
+				box-shadow: 0 2px 10px -4px var(--accent);
+			}
+			html[data-mode='professional'] .mode-toggle .indicator {
+				transform: translateX(100%);
+			}
+			.mode-toggle button {
+				position: relative;
+				z-index: 1;
+				display: inline-flex;
+				align-items: baseline;
+				gap: 0.5rem;
+				padding: 0.55rem 1.15rem;
+				border: 0;
+				background: transparent;
 				font-family: var(--font-display);
-				font-size: 0.95rem;
+				font-size: 0.84rem;
+				letter-spacing: 0.08em;
+				color: var(--ink-3);
+				cursor: pointer;
+				border-radius: 999px;
+				transition: color 320ms var(--ease-soft);
+			}
+			.mode-toggle button .num {
+				font-family: var(--font-mono);
+				font-size: 0.66rem;
+				letter-spacing: 0.04em;
+				opacity: 0.7;
+			}
+			.mode-toggle button[aria-pressed='true'] {
+				color: var(--paper);
+			}
+			.mode-toggle button[aria-pressed='true'] .num { opacity: 0.85; }
+			.mode-toggle button:hover { color: var(--ink); }
+			.mode-toggle button[aria-pressed='true']:hover { color: var(--paper); }
+
+			.toggle-hint {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--ink-3);
+				margin: 0;
+				letter-spacing: 0.02em;
+			}
+			.toggle-hint .sym { color: var(--accent); }
+			.hint-text {
+				display: inline-block;
+				transition: opacity 220ms var(--ease-soft), transform 320ms var(--ease-soft);
+				color: var(--accent-ink);
+			}
+			.hint-text[data-hint='professional'] { display: none; }
+			html[data-mode='professional'] .hint-text[data-hint='personal'] { display: none; }
+			html[data-mode='professional'] .hint-text[data-hint='professional'] { display: inline-block; }
+
+			/* ----- Panels ----- */
+			.panels {
+				display: grid;
+				grid-template-areas: 'stack';
+				margin-block: clamp(2rem, 5vw, 3.2rem) clamp(2.5rem, 6vw, 4rem);
+				position: relative;
+			}
+			.panel {
+				grid-area: stack;
+				opacity: 0;
+				transform: translateY(12px);
+				visibility: hidden;
+				pointer-events: none;
+				transition:
+					opacity 380ms var(--ease-soft),
+					transform 480ms var(--ease-out),
+					visibility 0ms linear 380ms;
+				/* Layout */
+				padding: clamp(1.6rem, 3.4vw, 2.6rem) clamp(1.5rem, 3.2vw, 2.4rem);
+				border-radius: 18px;
+				border: 1px solid transparent;
+				background:
+					linear-gradient(var(--paper), var(--paper)) padding-box,
+					linear-gradient(160deg, var(--accent-soft) 0%, var(--rule) 70%) border-box;
+				box-shadow:
+					0 1px 0 rgba(255,255,255,0.6) inset,
+					0 30px 60px -50px rgba(44, 40, 34, 0.35);
+			}
+			html[data-mode='personal']     .panel[data-panel='personal'],
+			html[data-mode='professional'] .panel[data-panel='professional'] {
+				opacity: 1;
+				transform: translateY(0);
+				visibility: visible;
+				pointer-events: auto;
+				transition:
+					opacity 460ms var(--ease-soft),
+					transform 520ms var(--ease-out),
+					visibility 0ms linear 0ms;
+			}
+
+			.panel-head {
+				margin-bottom: 1.4rem;
+				border-bottom: 1px dashed var(--rule);
+				padding-bottom: 1.2rem;
+			}
+			.panel-num {
+				font-family: var(--font-mono);
+				font-size: 0.74rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				color: var(--accent-ink);
+				transition: color 400ms var(--ease-soft);
+			}
+			.panel-head h2 {
+				font-family: var(--font-display);
+				font-weight: 500;
+				font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+				letter-spacing: -0.018em;
+				color: var(--ink);
+				margin: 0.5rem 0 0;
+				line-height: 1.18;
+			}
+			.panel-head h2 em {
+				font-style: italic;
+				color: var(--accent-ink);
+				/* Latin → Fraunces (real italic); CJK falls through to PingFang SC
+				   so it lines up with the rest of the h2 (also rendered in PingFang SC
+				   via the display font's CJK fallback). */
+				font-family: 'Fraunces', 'Clash Display', 'PingFang SC', 'Noto Sans Canadian Aboriginal', ui-sans-serif, system-ui, sans-serif;
+				font-variation-settings: 'opsz' 144, 'SOFT' 100;
+				font-weight: 500;
+				transition: color 400ms var(--ease-soft);
+			}
+			/* Synthesized italic on CJK looks awkward; keep colour emphasis only. */
+			.panel[data-panel='personal'] .panel-head h2 em {
+				font-style: normal;
+			}
+
+			.panel-body {
+				font-family: var(--font-body);
+				font-size: 1.05rem;
+				line-height: 1.7;
+				color: var(--ink-2);
+				font-variation-settings: 'opsz' 18, 'SOFT' 50;
+				max-width: 38rem;
+			}
+			.panel-body em {
+				font-style: italic;
+				color: var(--accent-ink);
+				transition: color 400ms var(--ease-soft);
+			}
+			.panel-body strong { color: var(--ink); font-weight: 600; }
+
+			.now-block {
+				margin: 1.6rem 0 0;
+				display: grid;
+				gap: 0.55rem;
+				padding: 1.1rem 1.2rem;
+				background: var(--paper-2);
+				border-radius: 10px;
+				border: 1px solid var(--rule-soft);
+			}
+			.now-row {
+				display: grid;
+				grid-template-columns: 10.5rem 1fr;
+				gap: 0.6rem;
+				align-items: baseline;
+				margin: 0;
+			}
+			.now-row dt {
+				font-family: var(--font-display);
+				font-size: 0.78rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
 				color: var(--ink-3);
 				margin: 0;
 			}
-			.hint a { color: var(--ink); background-image: none; }
-			.hint a:hover { color: var(--accent); }
+			.now-row dt .sym { color: var(--accent); }
+			.now-row dd {
+				margin: 0;
+				font-family: var(--font-body);
+				font-size: 0.98rem;
+				color: var(--ink);
+				font-variation-settings: 'opsz' 18, 'SOFT' 50;
+			}
+			.chip {
+				display: inline-block;
+				font-family: var(--font-display);
+				font-size: 0.72rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--accent-ink);
+				background: var(--accent-soft);
+				padding: 0.16rem 0.55rem;
+				border-radius: 999px;
+				margin-right: 0.3rem;
+				margin-bottom: 0.2rem;
+				transition: color 400ms var(--ease-soft), background-color 400ms var(--ease-soft);
+			}
+			.fav-pending {
+				font-style: italic;
+				color: var(--ink-4);
+				font-variation-settings: 'opsz' 14, 'SOFT' 100;
+			}
+			.favorites-intro {
+				margin: 1.5rem 0 0.9rem;
+				font-family: var(--font-body);
+				font-size: 0.95rem;
+				color: var(--ink-2);
+				font-variation-settings: 'opsz' 14, 'SOFT' 60;
+				border-top: 1px dashed var(--rule);
+				padding-top: 1.2rem;
+			}
+			.favorites-intro em {
+				font-style: italic;
+				color: var(--accent-ink);
+				font-variation-settings: 'opsz' 24, 'SOFT' 100;
+			}
+			.favorites-intro .sym { color: var(--accent); }
 
-			.recent { padding-block: 2rem 1rem; }
+			.panel-foot {
+				display: flex;
+				gap: 1.5rem;
+				margin-top: 1.6rem;
+				flex-wrap: wrap;
+				padding-top: 1rem;
+				border-top: 1px solid var(--rule-soft);
+			}
+			.ghost-link {
+				font-family: var(--font-display);
+				font-size: 0.92rem;
+				color: var(--ink);
+				background-image: none;
+				display: inline-flex;
+				align-items: center;
+				padding: 0.45rem 0;
+				position: relative;
+				transition: color 200ms var(--ease-out);
+			}
+			.ghost-link::after {
+				content: '';
+				position: absolute;
+				left: 0; right: 0; bottom: 0.3rem;
+				height: 1px;
+				background: var(--accent);
+				transform: scaleX(0.18);
+				transform-origin: left;
+				transition: transform 320ms var(--ease-out), background-color 400ms var(--ease-soft);
+			}
+			.ghost-link:hover { color: var(--accent-ink); }
+			.ghost-link:hover::after { transform: scaleX(1); }
+			.ghost-link .sym { color: var(--accent); }
+
+			/* ----- Section heads (shared) ----- */
+			.section-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				flex-wrap: wrap;
+				gap: 0.6rem;
+				margin: 0 0 1.4rem;
+			}
 			.section-head h2 {
 				font-family: var(--font-display);
 				font-weight: 500;
@@ -122,9 +648,142 @@ const recent = posts.slice(0, 5);
 				letter-spacing: 0.14em;
 				text-transform: uppercase;
 				color: var(--ink-3);
-				margin: 0 0 1.5rem;
+				margin: 0;
 			}
 			.section-head .sym { color: var(--accent); }
+			.section-link {
+				font-family: var(--font-display);
+				font-size: 0.78rem;
+				letter-spacing: 0.06em;
+				color: var(--ink-3);
+				background-image: none;
+				transition: color 200ms var(--ease-out);
+			}
+			.section-link:hover { color: var(--accent-ink); }
+			.section-link .sym { color: var(--accent); }
+
+			/* ----- Open source ----- */
+			.projects {
+				padding-block: 1.5rem 1rem;
+				margin-block: 1rem;
+			}
+			.project-grid {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 0.9rem;
+			}
+			.project-grid li { margin: 0; }
+			.project-card {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				padding: 1.15rem 1.25rem 1rem;
+				border: 1px solid transparent;
+				border-radius: 14px;
+				background:
+					linear-gradient(var(--paper), var(--paper)) padding-box,
+					linear-gradient(160deg, var(--rule) 0%, var(--accent-soft) 100%) border-box;
+				color: var(--ink);
+				transition:
+					transform 320ms var(--ease-out),
+					background 380ms var(--ease-soft),
+					box-shadow 320ms var(--ease-out);
+				box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset;
+			}
+			.project-card:hover {
+				transform: translateY(-2px);
+				background:
+					linear-gradient(var(--paper), var(--paper)) padding-box,
+					linear-gradient(160deg, var(--accent) 0%, var(--accent-soft) 100%) border-box;
+				box-shadow:
+					0 1px 0 rgba(255,255,255,0.5) inset,
+					0 18px 32px -22px var(--accent);
+			}
+			.card-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 0.5rem;
+				margin: 0 0 0.45rem;
+			}
+			.card-name {
+				font-family: var(--font-mono);
+				font-size: 1.02rem;
+				font-weight: 500;
+				letter-spacing: -0.005em;
+				color: var(--ink);
+				margin: 0;
+			}
+			.card-arr {
+				font-family: var(--font-display);
+				font-size: 0.95rem;
+				color: var(--ink-4);
+				line-height: 1;
+				transition:
+					color 280ms var(--ease-soft),
+					transform 280ms var(--ease-out);
+			}
+			.project-card:hover .card-arr {
+				color: var(--accent);
+				transform: translate(3px, -3px);
+			}
+			.card-desc {
+				font-family: var(--font-body);
+				font-size: 0.93rem;
+				line-height: 1.55;
+				color: var(--ink-2);
+				margin: 0 0 0.85rem;
+				flex: 1;
+				font-variation-settings: 'opsz' 14, 'SOFT' 50;
+			}
+			.card-lang {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.45rem;
+				align-self: flex-start;
+				font-family: var(--font-display);
+				font-size: 0.7rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--ink-3);
+			}
+			.card-lang-dot {
+				display: inline-block;
+				width: 6px;
+				height: 6px;
+				border-radius: 999px;
+				background: var(--accent);
+				transition: background-color 400ms var(--ease-soft);
+			}
+			@media (max-width: 640px) {
+				.project-grid { grid-template-columns: 1fr; }
+			}
+
+			/* ----- Mode-gated content ----- */
+			.recent-bucket { display: none; }
+			html[data-mode='personal']     .recent-bucket[data-bucket='personal']     { display: block; }
+			html[data-mode='professional'] .recent-bucket[data-bucket='professional'] { display: block; }
+
+			html[data-mode='personal'] .projects { display: none; }
+
+			.recent-empty {
+				font-family: var(--font-mono);
+				font-size: 0.85rem;
+				color: var(--ink-3);
+				padding: 1.2rem 0;
+				margin: 0;
+				border-top: 1px solid var(--rule);
+				border-bottom: 1px solid var(--rule);
+				letter-spacing: 0.02em;
+			}
+			.recent-empty .sym { color: var(--accent); }
+
+			/* ----- Recent writing ----- */
+			.recent { padding-block: 2rem 1rem; }
 
 			.post-list {
 				list-style: none;
@@ -141,9 +800,9 @@ const recent = posts.slice(0, 5);
 				padding-block: 1rem;
 				border-bottom: 1px solid var(--rule);
 				color: var(--ink);
-				transition: padding-left 220ms ease, color 180ms ease;
+				transition: padding-left 240ms var(--ease-out), color 200ms var(--ease-out);
 			}
-			.post-row:hover { padding-left: 0.4rem; color: var(--accent); }
+			.post-row:hover { padding-left: 0.4rem; color: var(--accent-ink); }
 			.post-date {
 				font-family: var(--font-mono);
 				font-size: 0.78rem;
@@ -153,7 +812,7 @@ const recent = posts.slice(0, 5);
 			.post-title {
 				font-family: var(--font-body);
 				font-size: 1.05rem;
-				font-variation-settings: 'opsz' 18, 'SOFT' 30;
+				font-variation-settings: 'opsz' 18, 'SOFT' 50;
 				line-height: 1.4;
 			}
 			.post-tags { display: inline-flex; gap: 0.4rem; }
@@ -168,11 +827,15 @@ const recent = posts.slice(0, 5);
 				border-radius: 999px;
 				white-space: nowrap;
 			}
+
+			@media (max-width: 640px) {
+				.now-row { grid-template-columns: 1fr; gap: 0.15rem; }
+				.now-row dd { font-size: 1rem; }
+				.toggle-row { gap: 0.8rem; }
+				.toggle-hint { width: 100%; }
+			}
 			@media (max-width: 560px) {
-				.post-row {
-					grid-template-columns: 1fr;
-					gap: 0.35rem;
-				}
+				.post-row { grid-template-columns: 1fr; gap: 0.35rem; }
 				.post-date { font-size: 0.72rem; }
 				.post-tags { margin-top: 0.2rem; }
 			}

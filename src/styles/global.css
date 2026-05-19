@@ -1,18 +1,36 @@
 /* ============================================================
-   Design system — Editorial Minimalism with Quiet Personality
+   Design system — "Two Tides"
+   Soft editorial paper. Two facets, one self.
+   Personal mode tints warm (clay). Professional tints cool (pewter).
    ============================================================ */
 
 :root {
-	/* Palette */
-	--paper:       #fafaf7;
-	--paper-2:     #f4f1e8;
-	--ink:         #1a1a1a;
-	--ink-2:       #3a3a3a;
-	--ink-3:       #707070;
-	--ink-4:       #a8a8a8;
-	--rule:        #e8e6dc;
-	--accent:      #c2410c;
-	--accent-soft: #f3e6dd;
+	/* Surface — soft warm oat / sand */
+	--paper:       #f3eee5;
+	--paper-2:     #ebe3d3;
+	--paper-3:     #e2d8c4;
+
+	/* Ink — warm near-black, never #000 */
+	--ink:         #2c2822;
+	--ink-2:       #564f47;
+	--ink-3:       #8a847a;
+	--ink-4:       #b7b0a3;
+	--rule:        #dfd6c5;
+	--rule-soft:   #ece4d3;
+
+	/* Dual accents — set per mode below */
+	--accent-personal:      #b8806e;   /* dusty clay */
+	--accent-personal-ink:  #8b5b48;
+	--accent-personal-soft: #ecd9cd;
+
+	--accent-pro:           #7e8fa6;   /* dusty pewter-blue */
+	--accent-pro-ink:       #4f6079;
+	--accent-pro-soft:      #d8dfe9;
+
+	/* Active accent — defaults to personal; mode swap below */
+	--accent:        var(--accent-personal);
+	--accent-ink:    var(--accent-personal-ink);
+	--accent-soft:   var(--accent-personal-soft);
 
 	/* Type stacks */
 	--font-display: 'Clash Display', 'Noto Sans Canadian Aboriginal', ui-sans-serif, system-ui, sans-serif;
@@ -20,8 +38,33 @@
 	--font-mono:    ui-monospace, 'SF Mono', Menlo, 'JetBrains Mono', monospace;
 
 	/* Reading rhythm */
-	--measure: 36rem;       /* ~640px reading column */
+	--measure: 36rem;
 	--pad-x: clamp(1.25rem, 5vw, 2.5rem);
+
+	/* Easing */
+	--ease-out: cubic-bezier(0.2, 0.6, 0.2, 1);
+	--ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-mode='personal'] {
+	--accent:      var(--accent-personal);
+	--accent-ink:  var(--accent-personal-ink);
+	--accent-soft: var(--accent-personal-soft);
+}
+html[data-mode='professional'] {
+	--accent:      var(--accent-pro);
+	--accent-ink:  var(--accent-pro-ink);
+	--accent-soft: var(--accent-pro-soft);
+}
+
+/* The page surface picks up a whisper-tint from the active mode. */
+body {
+	background:
+		radial-gradient(1100px 600px at 12% -10%, var(--accent-soft) 0%, transparent 55%),
+		radial-gradient(900px 500px at 110% 110%, var(--accent-soft) 0%, transparent 60%),
+		var(--paper);
+	background-attachment: fixed;
+	transition: background-color 600ms var(--ease-soft);
 }
 
 /* ----- Reset ----- */
@@ -29,12 +72,11 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
 	margin: 0;
-	background: var(--paper);
 	color: var(--ink);
 	font-family: var(--font-body);
 	font-size: 18px;
 	line-height: 1.7;
-	font-variation-settings: 'opsz' 14, 'SOFT' 30;
+	font-variation-settings: 'opsz' 14, 'SOFT' 50;
 	font-feature-settings: 'ss01', 'kern';
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -48,7 +90,7 @@ body {
 	padding-inline: var(--pad-x);
 }
 .wrap-wide {
-	max-width: 56rem;
+	max-width: 58rem;
 	margin-inline: auto;
 	padding-inline: var(--pad-x);
 }
@@ -71,7 +113,7 @@ h4, h5, h6 { font-size: 1.05rem; }
 p, ul, ol, blockquote { margin: 0 0 1em; }
 ul, ol { padding-left: 1.4em; }
 li { margin-bottom: 0.35em; }
-li::marker { color: var(--ink-3); }
+li::marker { color: var(--ink-4); }
 
 strong, b { font-weight: 600; color: var(--ink); }
 em, i { font-style: italic; }
@@ -84,24 +126,22 @@ a {
 	background-size: 100% 1px;
 	background-position: 0 100%;
 	background-repeat: no-repeat;
-	transition: color 180ms ease;
+	transition: color 200ms var(--ease-out), background-image 400ms var(--ease-soft);
 }
-a:hover { color: var(--accent); }
+a:hover { color: var(--accent-ink); }
 
-/* Plain links inside prose get a more discreet underline */
 .prose a {
 	background-image: linear-gradient(var(--ink-4), var(--ink-4));
 	background-size: 100% 1px;
 	background-position: 0 calc(100% - 1px);
-	transition: background-size 220ms ease, color 180ms ease;
+	transition: background-size 220ms var(--ease-out), color 200ms var(--ease-out), background-image 400ms var(--ease-soft);
 }
 .prose a:hover {
-	color: var(--accent);
+	color: var(--accent-ink);
 	background-image: linear-gradient(var(--accent), var(--accent));
 	background-size: 100% 1px;
 }
 
-/* Reset bg-image for SR-only and unstyled link contexts */
 .no-underline, .no-underline a { background-image: none !important; }
 
 /* ----- Inline code & blocks ----- */
@@ -139,6 +179,7 @@ blockquote {
 	border-left: 2px solid var(--accent);
 	color: var(--ink-2);
 	font-style: italic;
+	transition: border-color 400ms var(--ease-soft);
 }
 hr {
 	border: 0;
@@ -173,11 +214,11 @@ img { max-width: 100%; height: auto; display: block; }
 	display: inline-block;
 	color: var(--ink-4);
 	font-variation-settings: normal;
+	transition: color 400ms var(--ease-soft);
 }
 .sym--accent { color: var(--accent); }
 .dot { color: var(--ink-4); margin: 0 0.4em; }
 
-/* Tabular numbers for dates */
 .tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum'; }
 
 /* ----- Selection ----- */
@@ -200,21 +241,27 @@ img { max-width: 100%; height: auto; display: block; }
 :focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
-	border-radius: 2px;
+	border-radius: 4px;
 }
 
-/* ----- Motion ----- */
+/* ----- Motion primitives ----- */
 @keyframes rise {
-	from { opacity: 0; transform: translateY(8px); }
+	from { opacity: 0; transform: translateY(10px); }
 	to   { opacity: 1; transform: translateY(0); }
 }
-.rise { animation: rise 700ms cubic-bezier(0.2, 0.6, 0.2, 1) both; }
+.rise { animation: rise 720ms var(--ease-out) both; }
 .rise-1 { animation-delay: 60ms; }
 .rise-2 { animation-delay: 160ms; }
 .rise-3 { animation-delay: 260ms; }
 .rise-4 { animation-delay: 360ms; }
+.rise-5 { animation-delay: 460ms; }
+
+@keyframes blink {
+	0%, 92%, 100% { transform: scaleY(1); }
+	95%           { transform: scaleY(0.15); }
+}
 
 @media (prefers-reduced-motion: reduce) {
 	.rise { animation: none; }
-	* { transition-duration: 0ms !important; }
+	* { transition-duration: 0ms !important; animation-duration: 0ms !important; }
 }
