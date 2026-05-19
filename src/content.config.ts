@@ -4,7 +4,14 @@ import { z } from 'astro/zod';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+	// generateId also strips a trailing /index so a post can live in its own
+	// folder alongside its images (foo/index.md → id "foo").
+	loader: glob({
+		base: './src/content/blog',
+		pattern: '**/*.{md,mdx}',
+		generateId: ({ entry }) =>
+			entry.replace(/\.(md|mdx)$/, '').replace(/\/index$/, ''),
+	}),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) =>
 		z.object({
