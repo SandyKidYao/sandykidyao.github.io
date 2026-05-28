@@ -38,7 +38,7 @@
 	--font-mono:    ui-monospace, 'SF Mono', Menlo, 'JetBrains Mono', monospace;
 
 	/* Reading rhythm */
-	--measure: 36rem;
+	--measure: 46rem;
 	--pad-x: clamp(1.25rem, 5vw, 2.5rem);
 
 	/* Easing */
