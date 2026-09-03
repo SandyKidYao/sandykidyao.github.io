@@ -23,3 +23,6 @@ pnpm-debug.log*
 # editor settings
 .idea/
 .vscode/
+
+# tmp folder
+tmp/
