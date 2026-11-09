@@ -1,0 +1,40 @@
+{
+  "status": "geometric-line-samples-under-review",
+  "identityRule": "Project icons appear next to project names only; never composited inside cover art",
+  "format": "1600×900 SVG; no embedded title, logo, labels or decorative border",
+  "stroke": {
+    "width": 6,
+    "caps": "round",
+    "joins": "round"
+  },
+  "composition": {
+    "alignment": "center at 800,450",
+    "primaryFootprint": "about 55–65% width",
+    "symmetry": "Choose an explicit axis or rotation; preserve structural balance; semantic differences may vary within repeated equal frames",
+    "whitespace": "at least 12% outer clearance"
+  },
+  "colors": {
+    "safety": {
+      "ground": "#E1E6F4",
+      "ink": "#5267A9"
+    },
+    "wallpaper": {
+      "ground": "#E1EAE5",
+      "ink": "#567A6D"
+    },
+    "xiaobai": {
+      "ground": "#EAE5F1",
+      "ink": "#7C689B"
+    }
+  },
+  "avoid": [
+    "off-center repeated units",
+    "inconsistent stroke weights",
+    "arbitrary decoration",
+    "grain",
+    "shadows",
+    "gradient grounds",
+    "text inside covers"
+  ],
+  "generationStrategy": "AI proposes content metaphor and geometry; use SVG coordinates to enforce exact symmetry and stroke consistency."
+}

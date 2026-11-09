@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { postCover } from '../lib/blog';
+import FormattedDate from './FormattedDate.astro';
+interface Props { post: CollectionEntry<'blog'>; eager?: boolean }
+const { post, eager = false } = Astro.props;
+const cover = postCover(post);
+---
+<article class="content-card" data-post-tags={JSON.stringify(post.data.tags)}>
+  <a class="cover-link" href={`/blog/${post.id}/`} tabindex="-1" aria-hidden="true">
+    <img src={cover.src} alt="" width="1600" height="900" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </a>
+  <div class="card-copy">
+    <p class="card-meta"><FormattedDate date={post.data.pubDate} format="iso" /></p>
+    <h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
+    {post.data.description && <p class="card-description">{post.data.description}</p>}
+    {post.data.tags.length > 0 && <ul class="card-tags" aria-label="文章标签">{post.data.tags.map(tag => <li><a data-tag-link href={`/blog/?tag=${encodeURIComponent(tag)}`}>{tag}</a></li>)}</ul>}
+  </div>
+</article>

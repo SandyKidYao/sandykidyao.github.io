@@ -1,168 +1,41 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-
 type Props = CollectionEntry<'blog'>['data'];
-
-const { title, description, pubDate, updatedDate, heroImage, tags = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, cover, tags = [] } = Astro.props;
+const artwork = cover ?? { src: heroImage?.src ?? '/covers/default.svg', alt: title };
 ---
-
 <!doctype html>
 <html lang="zh-CN">
-	<head>
-		<BaseHead title={title} description={description} image={heroImage} />
-	</head>
-
-	<body>
-		<Header />
-
-		<main>
-			<article>
-				<header class="post-head wrap rise rise-1">
-					<p class="meta tnum">
-						<FormattedDate date={pubDate} />
-						{tags.length > 0 && (
-							<>
-								<span class="dot">·</span>
-								{tags.map((t, i) => (
-									<>
-										{i > 0 && <span class="dot">·</span>}
-										<span class="tag-inline">{t}</span>
-									</>
-								))}
-							</>
-						)}
-					</p>
-					<h1 class="post-title">{title}</h1>
-					{description && <p class="post-lede">{description}</p>}
-					{updatedDate && (
-						<p class="updated">
-							Updated&nbsp;<FormattedDate date={updatedDate} />
-						</p>
-					)}
-				</header>
-
-				{heroImage && (
-					<figure class="hero wrap-wide rise rise-2">
-						<Image width={1200} height={600} src={heroImage} alt="" />
-					</figure>
-				)}
-
-				<div class="prose wrap rise rise-3">
-					<slot />
-				</div>
-
-				<footer class="post-foot wrap">
-					<hr />
-					<p class="back">
-						<a href="/blog" class="no-underline"><span class="sym">←</span>&nbsp; All writing</a>
-					</p>
-				</footer>
-			</article>
-		</main>
-
-		<Footer />
-
-		<style>
-			.post-head {
-				padding-block: clamp(3rem, 7vw, 5rem) 2rem;
-			}
-			.meta {
-				font-family: var(--font-mono);
-				font-size: 0.78rem;
-				color: var(--ink-3);
-				letter-spacing: 0.04em;
-				margin: 0 0 1.2rem;
-			}
-			.tag-inline {
-				font-family: var(--font-display);
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
-				color: var(--ink-3);
-			}
-			.post-title {
-				font-family: var(--font-display);
-				font-weight: 600;
-				font-size: clamp(1.9rem, 4.6vw, 2.8rem);
-				line-height: 1.18;
-				letter-spacing: -0.018em;
-				color: var(--ink);
-				margin: 0 0 1.2rem;
-			}
-			.post-lede {
-				font-family: var(--font-body);
-				font-style: italic;
-				font-size: 1.1rem;
-				color: var(--ink-2);
-				line-height: 1.55;
-				margin: 0;
-				max-width: 34rem;
-				font-variation-settings: 'opsz' 32, 'SOFT' 100;
-			}
-			.updated {
-				margin-top: 0.6rem;
-				font-family: var(--font-mono);
-				font-size: 0.76rem;
-				color: var(--ink-4);
-			}
-
-			.hero {
-				margin: 1rem auto 2.5rem;
-			}
-			.hero :global(img) {
-				border-radius: 4px;
-				border: 1px solid var(--rule);
-			}
-
-			.prose {
-				font-family: var(--font-body);
-				font-size: 1.05rem;
-				line-height: 1.75;
-				color: var(--ink);
-				font-variation-settings: 'opsz' 14, 'SOFT' 30;
-			}
-			.prose :global(h2) {
-				font-family: var(--font-body);
-				font-size: 1.55rem;
-				font-weight: 600;
-				color: var(--ink);
-				line-height: 1.25;
-				letter-spacing: -0.005em;
-				margin: 2.6em 0 1em;
-				padding-left: 0.7rem;
-				border-left: 3px solid var(--accent);
-				border-radius: 2px;
-			}
-			.prose :global(h3) {
-				font-family: var(--font-body);
-				font-size: 1.22rem;
-				font-weight: 500;
-				color: var(--ink);
-				line-height: 1.3;
-				margin: 2em 0 0.75em;
-			}
-			.prose :global(p) { margin: 0 0 1.1em; color: var(--ink); }
-			.prose :global(strong) { color: var(--ink); font-weight: 600; }
-			.prose :global(li) { color: var(--ink); }
-
-			.prose :global(img) {
-				border-radius: 4px;
-				border: 1px solid var(--rule);
-				margin: 1.6em 0;
-			}
-
-			.post-foot { margin-top: 4rem; }
-			.post-foot .back {
-				font-family: var(--font-display);
-				color: var(--ink-3);
-				margin: 1rem 0 0;
-			}
-			.post-foot .back a { color: var(--ink-3); background-image: none; }
-			.post-foot .back a:hover { color: var(--accent); }
-		</style>
-	</body>
+  <head><BaseHead title={title} description={description} image={artwork.src} article /></head>
+  <body>
+    <Header />
+    <main id="main">
+      <article>
+        <header class="post-head wrap">
+          <p class="card-meta"><FormattedDate date={pubDate} format="iso" />{tags.map(tag => <a class="post-tag-link" href={`/blog/?tag=${encodeURIComponent(tag)}`}>{tag}</a>)}</p>
+          <h1>{title}</h1>
+          {description && <p class="post-description">{description}</p>}
+          {updatedDate && <p class="post-updated">更新于 <FormattedDate date={updatedDate} format="iso" /></p>}
+        </header>
+        <figure class="post-cover wrap"><img src={artwork.src} alt={artwork.alt} width="1600" height="900" decoding="async" /></figure>
+        <div class="prose wrap"><slot /></div>
+        <footer class="post-bottom wrap"><a href="/blog/">← 返回全部文章</a></footer>
+      </article>
+    </main>
+    <Footer />
+    <script>
+      document.querySelectorAll('.prose table').forEach((table, i) => {
+        const scroll = document.createElement('div');
+        scroll.className = 'table-scroll';
+        scroll.tabIndex = 0;
+        scroll.setAttribute('role', 'region');
+        scroll.setAttribute('aria-label', `数据表格 ${i + 1}，可横向滚动`);
+        table.before(scroll); scroll.append(table);
+      });
+    </script>
+  </body>
 </html>

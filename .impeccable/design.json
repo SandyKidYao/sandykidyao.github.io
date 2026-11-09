@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T06:25:15.875978+00:00",
+  "title": "Design System: SandyKid",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0005 247.84)",
+          "oklch(27% 0.0010 247.84)",
+          "oklch(39% 0.0014 247.84)",
+          "oklch(51% 0.0017 247.84)",
+          "oklch(63% 0.0017 247.84)",
+          "oklch(75% 0.0014 247.84)",
+          "oklch(87% 0.0009 247.84)",
+          "oklch(95% 0.0003 247.84)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0045 256.80)",
+          "oklch(27% 0.0090 256.80)",
+          "oklch(39% 0.0128 256.80)",
+          "oklch(51% 0.0150 256.80)",
+          "oklch(63% 0.0150 256.80)",
+          "oklch(75% 0.0128 256.80)",
+          "oklch(87% 0.0075 256.80)",
+          "oklch(95% 0.0030 256.80)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0066 255.61)",
+          "oklch(27% 0.0132 255.61)",
+          "oklch(39% 0.0187 255.61)",
+          "oklch(51% 0.0220 255.61)",
+          "oklch(63% 0.0220 255.61)",
+          "oklch(75% 0.0187 255.61)",
+          "oklch(87% 0.0110 255.61)",
+          "oklch(95% 0.0044 255.61)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(15% 0.0454 265.46)",
+          "oklch(27% 0.0909 265.46)",
+          "oklch(39% 0.1288 265.46)",
+          "oklch(51% 0.1515 265.46)",
+          "oklch(63% 0.1515 265.46)",
+          "oklch(75% 0.1288 265.46)",
+          "oklch(87% 0.0757 265.46)",
+          "oklch(95% 0.0303 265.46)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "oklch(15% 0.0031 261.79)",
+          "oklch(27% 0.0063 261.79)",
+          "oklch(39% 0.0089 261.79)",
+          "oklch(51% 0.0104 261.79)",
+          "oklch(63% 0.0104 261.79)",
+          "oklch(75% 0.0089 261.79)",
+          "oklch(87% 0.0052 261.79)",
+          "oklch(95% 0.0021 261.79)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0019 255.48)",
+          "oklch(27% 0.0037 255.48)",
+          "oklch(39% 0.0053 255.48)",
+          "oklch(51% 0.0062 255.48)",
+          "oklch(63% 0.0062 255.48)",
+          "oklch(75% 0.0053 255.48)",
+          "oklch(87% 0.0031 255.48)",
+          "oklch(95% 0.0012 255.48)"
+        ]
+      },
+      "selection": {
+        "role": "neutral",
+        "displayName": "Selection",
+        "tonalRamp": [
+          "oklch(15% 0.0122 271.89)",
+          "oklch(27% 0.0245 271.89)",
+          "oklch(39% 0.0347 271.89)",
+          "oklch(51% 0.0408 271.89)",
+          "oklch(63% 0.0408 271.89)",
+          "oklch(75% 0.0347 271.89)",
+          "oklch(87% 0.0204 271.89)",
+          "oklch(95% 0.0082 271.89)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "Dark Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0022 229.32)",
+          "oklch(27% 0.0045 229.32)",
+          "oklch(39% 0.0063 229.32)",
+          "oklch(51% 0.0074 229.32)",
+          "oklch(63% 0.0074 229.32)",
+          "oklch(75% 0.0063 229.32)",
+          "oklch(87% 0.0037 229.32)",
+          "oklch(95% 0.0015 229.32)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0027 134.87)",
+          "oklch(27% 0.0054 134.87)",
+          "oklch(39% 0.0076 134.87)",
+          "oklch(51% 0.0090 134.87)",
+          "oklch(63% 0.0090 134.87)",
+          "oklch(75% 0.0076 134.87)",
+          "oklch(87% 0.0045 134.87)",
+          "oklch(95% 0.0018 134.87)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0045 155.49)",
+          "oklch(27% 0.0089 155.49)",
+          "oklch(39% 0.0126 155.49)",
+          "oklch(51% 0.0149 155.49)",
+          "oklch(63% 0.0149 155.49)",
+          "oklch(75% 0.0126 155.49)",
+          "oklch(87% 0.0074 155.49)",
+          "oklch(95% 0.0030 155.49)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Dark Accent",
+        "tonalRamp": [
+          "oklch(15% 0.0376 127.47)",
+          "oklch(27% 0.0752 127.47)",
+          "oklch(39% 0.1065 127.47)",
+          "oklch(51% 0.1253 127.47)",
+          "oklch(63% 0.1253 127.47)",
+          "oklch(75% 0.1065 127.47)",
+          "oklch(87% 0.0626 127.47)",
+          "oklch(95% 0.0251 127.47)"
+        ]
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "Dark Rule",
+        "tonalRamp": [
+          "oklch(15% 0.0051 152.03)",
+          "oklch(27% 0.0102 152.03)",
+          "oklch(39% 0.0144 152.03)",
+          "oklch(51% 0.0170 152.03)",
+          "oklch(63% 0.0170 152.03)",
+          "oklch(75% 0.0144 152.03)",
+          "oklch(87% 0.0085 152.03)",
+          "oklch(95% 0.0034 152.03)"
+        ]
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0041 163.62)",
+          "oklch(27% 0.0082 163.62)",
+          "oklch(39% 0.0116 163.62)",
+          "oklch(51% 0.0137 163.62)",
+          "oklch(63% 0.0137 163.62)",
+          "oklch(75% 0.0116 163.62)",
+          "oklch(87% 0.0068 163.62)",
+          "oklch(95% 0.0027 163.62)"
+        ]
+      },
+      "dark-selection": {
+        "role": "neutral",
+        "displayName": "Dark Selection",
+        "tonalRamp": [
+          "oklch(15% 0.0160 147.23)",
+          "oklch(27% 0.0320 147.23)",
+          "oklch(39% 0.0453 147.23)",
+          "oklch(51% 0.0533 147.23)",
+          "oklch(63% 0.0533 147.23)",
+          "oklch(75% 0.0453 147.23)",
+          "oklch(87% 0.0266 147.23)",
+          "oklch(95% 0.0107 147.23)"
+        ]
+      },
+      "cover-blue-bg": {
+        "role": "neutral",
+        "displayName": "Cover Blue Bg",
+        "tonalRamp": [
+          "oklch(15% 0.0059 270.20)",
+          "oklch(27% 0.0118 270.20)",
+          "oklch(39% 0.0168 270.20)",
+          "oklch(51% 0.0197 270.20)",
+          "oklch(63% 0.0197 270.20)",
+          "oklch(75% 0.0168 270.20)",
+          "oklch(87% 0.0099 270.20)",
+          "oklch(95% 0.0039 270.20)"
+        ]
+      },
+      "cover-blue-line": {
+        "role": "neutral",
+        "displayName": "Cover Blue Line",
+        "tonalRamp": [
+          "oklch(15% 0.0321 269.17)",
+          "oklch(27% 0.0643 269.17)",
+          "oklch(39% 0.0911 269.17)",
+          "oklch(51% 0.1072 269.17)",
+          "oklch(63% 0.1072 269.17)",
+          "oklch(75% 0.0911 269.17)",
+          "oklch(87% 0.0536 269.17)",
+          "oklch(95% 0.0214 269.17)"
+        ]
+      },
+      "cover-green-bg": {
+        "role": "neutral",
+        "displayName": "Cover Green Bg",
+        "tonalRamp": [
+          "oklch(15% 0.0035 162.04)",
+          "oklch(27% 0.0070 162.04)",
+          "oklch(39% 0.0099 162.04)",
+          "oklch(51% 0.0117 162.04)",
+          "oklch(63% 0.0117 162.04)",
+          "oklch(75% 0.0099 162.04)",
+          "oklch(87% 0.0058 162.04)",
+          "oklch(95% 0.0023 162.04)"
+        ]
+      },
+      "cover-green-line": {
+        "role": "neutral",
+        "displayName": "Cover Green Line",
+        "tonalRamp": [
+          "oklch(15% 0.0137 170.19)",
+          "oklch(27% 0.0274 170.19)",
+          "oklch(39% 0.0388 170.19)",
+          "oklch(51% 0.0457 170.19)",
+          "oklch(63% 0.0457 170.19)",
+          "oklch(75% 0.0388 170.19)",
+          "oklch(87% 0.0228 170.19)",
+          "oklch(95% 0.0091 170.19)"
+        ]
+      },
+      "cover-purple-bg": {
+        "role": "neutral",
+        "displayName": "Cover Purple Bg",
+        "tonalRamp": [
+          "oklch(15% 0.0051 304.79)",
+          "oklch(27% 0.0101 304.79)",
+          "oklch(39% 0.0144 304.79)",
+          "oklch(51% 0.0169 304.79)",
+          "oklch(63% 0.0169 304.79)",
+          "oklch(75% 0.0144 304.79)",
+          "oklch(87% 0.0085 304.79)",
+          "oklch(95% 0.0034 304.79)"
+        ]
+      },
+      "cover-purple-line": {
+        "role": "neutral",
+        "displayName": "Cover Purple Line",
+        "tonalRamp": [
+          "oklch(15% 0.0242 301.85)",
+          "oklch(27% 0.0483 301.85)",
+          "oklch(39% 0.0684 301.85)",
+          "oklch(51% 0.0805 301.85)",
+          "oklch(63% 0.0805 301.85)",
+          "oklch(75% 0.0684 301.85)",
+          "oklch(87% 0.0403 301.85)",
+          "oklch(95% 0.0161 301.85)"
+        ]
+      },
+      "cover-sand-bg": {
+        "role": "neutral",
+        "displayName": "Cover Sand Bg",
+        "tonalRamp": [
+          "oklch(15% 0.0038 86.83)",
+          "oklch(27% 0.0077 86.83)",
+          "oklch(39% 0.0109 86.83)",
+          "oklch(51% 0.0128 86.83)",
+          "oklch(63% 0.0128 86.83)",
+          "oklch(75% 0.0109 86.83)",
+          "oklch(87% 0.0064 86.83)",
+          "oklch(95% 0.0026 86.83)"
+        ]
+      },
+      "cover-sand-line": {
+        "role": "neutral",
+        "displayName": "Cover Sand Line",
+        "tonalRamp": [
+          "oklch(15% 0.0156 66.43)",
+          "oklch(27% 0.0312 66.43)",
+          "oklch(39% 0.0443 66.43)",
+          "oklch(51% 0.0521 66.43)",
+          "oklch(63% 0.0521 66.43)",
+          "oklch(75% 0.0443 66.43)",
+          "oklch(87% 0.0260 66.43)",
+          "oklch(95% 0.0104 66.43)"
+        ]
+      },
+      "cover-peach-bg": {
+        "role": "neutral",
+        "displayName": "Cover Peach Bg",
+        "tonalRamp": [
+          "oklch(15% 0.0044 64.33)",
+          "oklch(27% 0.0087 64.33)",
+          "oklch(39% 0.0124 64.33)",
+          "oklch(51% 0.0146 64.33)",
+          "oklch(63% 0.0146 64.33)",
+          "oklch(75% 0.0124 64.33)",
+          "oklch(87% 0.0073 64.33)",
+          "oklch(95% 0.0029 64.33)"
+        ]
+      },
+      "cover-peach-line": {
+        "role": "neutral",
+        "displayName": "Cover Peach Line",
+        "tonalRamp": [
+          "oklch(15% 0.0192 55.12)",
+          "oklch(27% 0.0384 55.12)",
+          "oklch(39% 0.0544 55.12)",
+          "oklch(51% 0.0641 55.12)",
+          "oklch(63% 0.0641 55.12)",
+          "oklch(75% 0.0544 55.12)",
+          "oklch(87% 0.0320 55.12)",
+          "oklch(95% 0.0128 55.12)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Article card titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Shared interface text."
+      },
+      "article": {
+        "displayName": "Article",
+        "purpose": "Readable long-form article prose."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Dates and categories with tabular date numerals."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Article inline code."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "cover-hover",
+        "value": "transform 300ms cubic-bezier(.2,.7,.2,1)",
+        "purpose": "On hover-capable devices, scale the cover image to 1.025 inside its clipped frame."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none; scroll-behavior: auto",
+        "purpose": "Remove cover transitions and smooth page scrolling when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "two-columns",
+        "value": "1000px"
+      },
+      {
+        "name": "single-column",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Theme icon button",
+      "kind": "custom",
+      "refersTo": "theme-button",
+      "description": "Icon-only native button cycling system/light/dark with current-state and next-action accessible labels.",
+      "html": "<button class=\"ds-theme\" type=\"button\" aria-label=\"当前跟随系统，切换到暗色\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" aria-hidden=\"true\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"13\" rx=\"2\"/><path d=\"M8 21h8M12 17v4\"/></svg></button>",
+      "css": ".ds-theme{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid var(--rule,#e1e5ec);border-radius:10px;background:transparent;color:var(--muted,#606975);cursor:pointer}.ds-theme:hover{background:var(--surface,#f0f3f7);color:var(--accent,#3659b5)}.ds-theme:focus-visible{outline:2px solid var(--accent,#3659b5);outline-offset:5px}@media(pointer:coarse){.ds-theme{width:44px;height:44px}}"
+    },
+    {
+      "name": "Main navigation",
+      "kind": "nav",
+      "refersTo": "card-title",
+      "description": "Text navigation with an accented and underlined current page.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"主导航\"><a href=\"#blog\" aria-current=\"page\">博客</a><a href=\"#projects\">项目</a><a href=\"https://github.com/SandyKidYao\">GitHub</a></nav>",
+      "css": ".ds-nav{font-family:var(--font-body,\"Helvetica Neue\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif);color:var(--ink,#20252c);display:flex;align-items:center;gap:1.65rem;font-size:.875rem}.ds-nav a{color:inherit;text-decoration:none;padding:.5rem 0;text-underline-offset:.22em}.ds-nav a[aria-current]{color:var(--accent,#3659b5);text-decoration:underline;text-decoration-thickness:1px}.ds-nav a:hover{color:var(--accent,#3659b5)}.ds-nav a:focus-visible { outline:2px solid var(--accent,#3659b5); outline-offset:5px; border-radius:3px; }@media(max-width:600px){.ds-nav{gap:1rem;font-size:.82rem}}@media(pointer:coarse){.ds-nav a{min-height:44px;display:inline-flex;align-items:center}}"
+    },
+    {
+      "name": "Article card",
+      "kind": "card",
+      "refersTo": "cover",
+      "description": "Open illustrated card; the geometric preview is a specimen, not a shipping cover.",
+      "html": "<article class=\"ds-card\"><a class=\"ds-cover\" href=\"#article\" tabindex=\"-1\" aria-hidden=\"true\"><svg viewBox=\"0 0 1600 900\" role=\"img\" aria-label=\"Geometric frame sample\"><rect width=\"1600\" height=\"900\" fill=\"#E1E6F4\"/><g fill=\"none\" stroke=\"#5267A9\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"400\" y=\"250\" width=\"800\" height=\"400\" rx=\"24\"/><path d=\"M800 250v400\"/><circle cx=\"600\" cy=\"450\" r=\"90\"/><circle cx=\"1000\" cy=\"450\" r=\"90\"/></g></svg></a><div class=\"ds-copy\"><p class=\"ds-meta\">2026-11-09</p><h3><a href=\"#article\">文章标题</a></h3><p class=\"ds-description\">文章摘要以清晰、克制的文字呈现。</p></div></article>",
+      "css": ".ds-card{font-family:var(--font-body,\"Helvetica Neue\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif);color:var(--ink,#20252c);max-width:360px;min-width:0}.ds-cover{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:var(--surface,#f0f3f7)}.ds-cover svg{display:block;width:100%;height:100%;transition:transform 300ms cubic-bezier(.2,.7,.2,1)}.ds-copy{padding-top:1rem}.ds-meta{margin:0;color:var(--muted,#606975);font-size:.75rem;line-height:1.65;font-variant-numeric:tabular-nums}.ds-card h3{margin:.4rem 0 0;font-weight:600;font-size:1.1rem;line-height:1.55;letter-spacing:-.025em}.ds-card a{color:inherit;text-decoration:none}.ds-card a:hover{color:var(--accent,#3659b5)}.ds-card a:focus-visible { outline:2px solid var(--accent,#3659b5); outline-offset:5px; border-radius:3px; }.ds-description{margin:.45rem 0 0;color:var(--muted,#606975);font-size:.85rem;line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@media(hover:hover){.ds-card:hover .ds-cover svg{transform:scale(1.025)}}@media(prefers-reduced-motion:reduce){.ds-cover svg{transition:none}}@media(max-width:600px){.ds-card h3{font-size:1.15rem}.ds-description{-webkit-line-clamp:3}}"
+    },
+    {
+      "name": "Project card",
+      "kind": "card",
+      "refersTo": "cover",
+      "description": "Same open card with project title, description, category and destinations. The specimen has no invented identity icon.",
+      "html": "<article class=\"ds-card\"><a class=\"ds-cover\" href=\"#project\" tabindex=\"-1\" aria-hidden=\"true\"><svg viewBox=\"0 0 1600 900\" role=\"img\" aria-label=\"Geometric frame sample\"><rect width=\"1600\" height=\"900\" fill=\"#E1E6F4\"/><g fill=\"none\" stroke=\"#5267A9\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"400\" y=\"250\" width=\"800\" height=\"400\" rx=\"24\"/><path d=\"M800 250v400\"/><circle cx=\"600\" cy=\"450\" r=\"90\"/><circle cx=\"1000\" cy=\"450\" r=\"90\"/></g></svg></a><div class=\"ds-copy\"><h3 class=\"ds-project-title\"><a href=\"#project\">项目名称</a></h3><p class=\"ds-description\">项目用途与内容简介。</p><p class=\"ds-meta ds-category\">独立软件项目</p><div class=\"ds-links\"><a href=\"#project\">项目页 ↗</a><a href=\"https://github.com/SandyKidYao\">GitHub ↗</a></div></div></article>",
+      "css": ".ds-card{font-family:var(--font-body,\"Helvetica Neue\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif);color:var(--ink,#20252c);max-width:360px;min-width:0}.ds-cover{display:block;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:var(--surface,#f0f3f7)}.ds-cover svg{display:block;width:100%;height:100%;transition:transform 300ms cubic-bezier(.2,.7,.2,1)}.ds-copy{padding-top:1rem}.ds-meta{margin:0;color:var(--muted,#606975);font-size:.75rem;line-height:1.65;font-variant-numeric:tabular-nums}.ds-card h3{margin:.4rem 0 0;font-weight:600;font-size:1.1rem;line-height:1.55;letter-spacing:-.025em}.ds-card a{color:inherit;text-decoration:none}.ds-card a:hover{color:var(--accent,#3659b5)}.ds-card a:focus-visible { outline:2px solid var(--accent,#3659b5); outline-offset:5px; border-radius:3px; }.ds-description{margin:.45rem 0 0;color:var(--muted,#606975);font-size:.85rem;line-height:1.75;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@media(hover:hover){.ds-card:hover .ds-cover svg{transform:scale(1.025)}}@media(prefers-reduced-motion:reduce){.ds-cover svg{transition:none}}@media(max-width:600px){.ds-card h3{font-size:1.15rem}.ds-description{-webkit-line-clamp:3}}.ds-card .ds-project-title{display:flex;align-items:center;gap:.55rem;min-height:1.9rem;font-size:1.2rem;margin-top:0}.ds-card .ds-category{margin-top:.7rem}.ds-links{display:flex;gap:1rem;margin-top:.7rem;font-size:.8rem}.ds-links a{text-decoration:underline;text-decoration-color:var(--rule,#e1e5ec)}.ds-links a:hover{text-decoration-color:var(--accent,#3659b5)}@media(pointer:coarse){.ds-links a{min-height:44px;display:inline-flex;align-items:center}}"
+    },
+    {
+      "name": "Scrollable article table",
+      "kind": "custom",
+      "refersTo": "table-heading",
+      "description": "Keyboard-focusable horizontal region keeps wide article tables readable.",
+      "html": "<div class=\"ds-table\" tabindex=\"0\" role=\"region\" aria-label=\"数据表格，可横向滚动\"><table><thead><tr><th>项目</th><th>说明</th><th>状态</th></tr></thead><tbody><tr><td>示例</td><td>内容保持可读宽度</td><td>完成</td></tr></tbody></table></div>",
+      "css": ".ds-table{font-family:var(--font-body,\"Helvetica Neue\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif);color:var(--ink,#20252c);overflow-x:auto;max-width:100%;margin:1.8rem 0}.ds-table table{border-collapse:collapse;font-size:.82rem;line-height:1.7;width:100%;min-width:38rem}.ds-table th,.ds-table td{text-align:left;vertical-align:top;border-bottom:1px solid var(--rule,#e1e5ec);padding:.8rem .75rem;min-width:7rem}.ds-table th{background:var(--surface,#f0f3f7);font-weight:600}.ds-table:focus-visible { outline:2px solid var(--accent,#3659b5); outline-offset:5px; border-radius:3px; }"
+    },
+    {
+      "name": "Article code",
+      "kind": "custom",
+      "refersTo": "article-code",
+      "description": "Quiet inline code and horizontally scrolling code block.",
+      "html": "<div class=\"ds-prose\"><p>使用 <code>npm run build</code> 构建网站。</p><pre><code>npm run build</code></pre></div>",
+      "css": ".ds-prose{font-family:var(--font-body,\"Helvetica Neue\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif);color:var(--ink,#20252c);font-size:1.03rem;line-height:1.95}.ds-prose code{font-family:var(--font-mono,\"SFMono-Regular\",Consolas,monospace);background:var(--surface,#f0f3f7);padding:.12rem .35rem;border-radius:4px;font-size:.87em}.ds-prose pre{max-width:100%;overflow-x:auto;padding:1.2rem;background:var(--surface,#f0f3f7);border-radius:12px;line-height:1.65}.ds-prose pre code{background:transparent;padding:0}@media(max-width:600px){.ds-prose{font-size:1rem}}"
+    },
+    {
+      "name": "Tag filter",
+      "kind": "custom",
+      "refersTo": "tag-filter",
+      "description": "Underlined text filters with subtle inline counts and a shared baseline; URL-backed state.",
+      "html": "<div class=\"ds-tags\" role=\"group\" aria-label=\"按标签筛选文章\"><span>标签</span><button type=\"button\" aria-pressed=\"true\">全部 <small>4</small></button><button type=\"button\" aria-pressed=\"false\">软件工程 <small>4</small></button></div>",
+      "css": ".ds-tags{display:flex;align-items:baseline;flex-wrap:wrap;gap:1.6rem;border-bottom:1px solid var(--rule,#e1e5ec)}.ds-tags>span{font-size:.8rem;color:var(--muted,#606975)}.ds-tags button{position:relative;display:inline-flex;align-items:baseline;gap:.45rem;padding:.8rem .1rem;border:0;border-radius:0;background:transparent;color:var(--muted,#606975);font:inherit;font-size:.875rem;cursor:pointer}.ds-tags button small{font-size:.7rem}.ds-tags button[aria-pressed=\"true\"]{color:var(--ink,#20252c);font-weight:600}.ds-tags button[aria-pressed=\"true\"]::after{content:\"\";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent,#3659b5)}.ds-tags button:focus-visible{outline:2px solid var(--accent,#3659b5);outline-offset:5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Illustrated Notebook",
+    "overview": "A clear illustrated notebook for Chinese writing and independent software projects. The user selected a shared light/dark layout with illustrated cards and deliberate system sans typography matching the approved prototype. Content and subject-specific geometry provide the character; the interface stays quiet.\n\nCool near-white and blue emphasis become charcoal and pale green in dark mode. Both themes preserve the same composition and cover artwork. Blog and project sections follow one another vertically, with no personal introduction or personal/professional browsing modes.",
+    "keyCharacteristics": [
+      "Shared layout across light and dark themes.",
+      "Subject-specific geometric line covers with exact proportions and symmetry.",
+      "System sans typography and open, flat illustrated cards.",
+      "Original project icons beside names, separate from cover illustrations."
+    ],
+    "rules": [
+      {
+        "name": "The Same Artwork Rule",
+        "body": "Both themes use the same cover asset without inversion or CSS filters.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do keep blog and projects in vertically arranged sections.",
+      "Do default new covers to the geometric line system after reading the article or project README.",
+      "Do preserve original icons beside project names and omit icons when no original exists.",
+      "Do use the same cover artwork in both themes.",
+      "Do preserve readable article width and horizontally scrollable tables.",
+      "Do preserve system/light/dark selection, remembered preference, visible keyboard focus and reduced-motion support."
+    ],
+    "donts": [
+      "Don't split the homepage into blog-left/project-right columns.",
+      "Don't place project icons, invented logos, text or fabricated interfaces inside geometric covers.",
+      "Don't introduce paper-relief artwork unless the user requests that alternative.",
+      "Don't add personal introductions or personal/professional browsing modes.",
+      "Don't use theme inversion filters, shadows or gradients on geometric covers."
+    ]
+  }
+}

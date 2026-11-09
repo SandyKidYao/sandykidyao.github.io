@@ -1,0 +1,101 @@
+{
+  "defaultStyle": "geometric-line",
+  "alternativeStyle": "paper-relief",
+  "identityRule": "Icons next to project names only, never inside covers",
+  "covers": [
+    {
+      "id": "a-watcher",
+      "src": "/covers/a-watcher.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/a-watcher.png"
+    },
+    {
+      "id": "agent-safety",
+      "src": "/covers/agent-safety.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/agent-safety.png"
+    },
+    {
+      "id": "ai-hardware",
+      "src": "/covers/ai-hardware.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/ai-hardware.png"
+    },
+    {
+      "id": "ai-workflow",
+      "src": "/covers/ai-workflow.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/ai-workflow.png"
+    },
+    {
+      "id": "cheap-code",
+      "src": "/covers/cheap-code.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/cheap-code.png"
+    },
+    {
+      "id": "default",
+      "src": "/covers/default.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/default.png"
+    },
+    {
+      "id": "evk",
+      "src": "/covers/evk.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/evk.png"
+    },
+    {
+      "id": "konbini",
+      "src": "/covers/konbini.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/konbini.png"
+    },
+    {
+      "id": "nowly",
+      "src": "/covers/nowly.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/nowly.png"
+    },
+    {
+      "id": "wallpaper-shift",
+      "src": "/covers/wallpaper-shift.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/wallpaper-shift.png"
+    },
+    {
+      "id": "xiaobai",
+      "src": "/covers/xiaobai.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md",
+      "social": "/covers/social/xiaobai.png"
+    }
+  ],
+  "iconSources": {
+    "/icons/konbini.png": "https://raw.githubusercontent.com/SandyKidYao/konbini/main/desktop/icon.png",
+    "/icons/wallpaper-shift.png": "https://raw.githubusercontent.com/SandyKidYao/wallpaper-shift/main/design/icon/png/icon-512.png",
+    "/icons/a-watcher.png": "https://raw.githubusercontent.com/SandyKidYao/a-watcher/main/docs/images/app-icon.png",
+    "/icons/nowly.svg": "https://raw.githubusercontent.com/SandyKidYao/nowly/main/assets/brand/nowly-app-icon.svg"
+  }
+}

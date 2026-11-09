@@ -1,13 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="SandyKid">
-    <rect width="128" height="128" rx="30" ry="30" fill="#b8806e" />
-    <circle cx="46" cy="50" r="9" fill="#f3eee5" />
-    <circle cx="82" cy="50" r="9" fill="#f3eee5" />
-    <path d="M40 76 Q64 104 88 76" stroke="#f3eee5" stroke-width="10" stroke-linecap="round" fill="none" />
-    <style>
-        @media (prefers-color-scheme: dark) {
-            rect { fill: #7e8fa6; }
-            circle { fill: #f3eee5; }
-            path { stroke: #f3eee5; }
-        }
-    </style>
+  <rect width="128" height="128" rx="30" fill="#E1E6F4"/>
+  <g fill="none" stroke="#5267A9" stroke-width="5"><rect x="26" y="26" width="76" height="76" rx="23"/><circle cx="64" cy="64" r="16"/></g>
+  <style>@media(prefers-color-scheme:dark){rect{fill:#263529}g{stroke:#c5ec90}g rect{fill:none}}</style>
 </svg>

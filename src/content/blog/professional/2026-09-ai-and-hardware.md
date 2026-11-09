@@ -3,6 +3,9 @@ title: "AI Agent 与硬件"
 description: "从 Anthropic 的模型硬件标准（MHS）出发，结合我做设备调度系统和让 LLM 实时控制设备的经历，聊聊 AI Agent 与硬件之间的关联与壁垒，以及把 LLM 变成程序本身一部分的设想。"
 pubDate: 2026-09-03
 tags: ["软件工程"]
+cover:
+  src: /covers/ai-hardware.svg
+  alt: 芯片与四向等距接口，表达 AI 与物理硬件的连接
 ---
 
 [![BB](https://img.shields.io/badge/created_with-BB-FFD900)](https://github.com/FulcrumStd/blogbuddy)

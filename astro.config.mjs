@@ -7,5 +7,6 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://sandykidyao.github.io',
+	devToolbar: { enabled: false },
 	integrations: [mdx(), sitemap()],
 });

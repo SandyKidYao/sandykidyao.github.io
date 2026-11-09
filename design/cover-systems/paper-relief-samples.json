@@ -1,0 +1,27 @@
+{
+  "style": "paper-relief",
+  "status": "alternative-style-reference",
+  "samples": {
+    "agent-safety": {
+      "artwork": "samples/agent-safety.png",
+      "kind": "blog"
+    },
+    "wallpaper-shift": {
+      "artwork": "samples/wallpaper-shift-background.png",
+      "kind": "project-with-icon",
+      "originalIcon": "wallpaper-shift-icon.png",
+      "composition": {
+        "placement": "outside-cover-next-to-project-title",
+        "iconWidth": 24
+      },
+      "iconOrigin": "https://raw.githubusercontent.com/SandyKidYao/wallpaper-shift/main/design/icon/png/icon-512.png"
+    },
+    "xiaobai": {
+      "artwork": "samples/xiaobai.png",
+      "kind": "project-without-icon"
+    }
+  },
+  "promptFile": "paper-relief-prompts.json",
+  "themeRule": "Same images on both themes; no filter or recoloring",
+  "preview": "preview.html"
+}

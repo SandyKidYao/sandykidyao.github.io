@@ -1,0 +1,91 @@
+{
+  "status": "paper-relief-selected-samples-under-review",
+  "purpose": "Unified covers for blog posts and six indie projects, shared by light and dark website themes",
+  "common": {
+    "canvas": "16:9, final 1600×900 WebP; retain source artwork",
+    "safeArea": "Keep critical content within central 76% width and 76% height; leave at least 8% outer breathing room",
+    "composition": "One primary metaphor, at most three secondary elements; primary subject spans 45–65% of image width",
+    "text": "No generated headlines, dates, badges, UI labels or watermarks; website renders titles as HTML",
+    "themes": "Use identical cover in both themes; avoid pure-white full fields, pure-black full fields, outer glows and theme-specific recoloring",
+    "existingIcon": "Preserve original icon geometry, wordmark and colors. Generate setting separately, then composite original asset without AI redrawing it. Reserve logo zone in prompt.",
+    "existingScreenshot": "Preserve actual UI and its text; use original image as a clean inset or scene within the common frame, without asking AI to invent UI",
+    "noAsset": "Use a concept illustration, explicitly not a new official logo or invented product screenshot",
+    "article": "Extract a concrete central claim from the article body, create one visual metaphor, avoid literal title illustration when misleading",
+    "reference": "After selection approve three master covers: article, project with identity asset, project without identity asset. Supply those as style references for future generation. Prompts alone do not guarantee consistency."
+  },
+  "styles": [
+    {
+      "id": "soft-objects",
+      "name": "柔质物件",
+      "geometry": "Precise rounded solids; 3/4 orthographic camera; one main object and one clear spatial relationship",
+      "materials": "Matte resin as primary material; frosted acrylic as optional secondary material; no metallic chrome or glass rainbow",
+      "lighting": "Large soft upper-left key light; short grounded down-right shadows; constant camera distance",
+      "palette": {
+        "base": [
+          "#E3EAF4",
+          "#E4EBDD",
+          "#EBE4F2"
+        ],
+        "ink": "#25334D",
+        "accents": [
+          "#5776CB",
+          "#739A7B",
+          "#A887BC"
+        ]
+      },
+      "strength": "Modern product presentation; can visually bridge everyday apps and developer tools",
+      "risk": "Common in current product illustration; needs distinctive metaphors to avoid interchangeable plastic objects",
+      "promptSuffix": "柔质微缩物件风格。主材质为哑光树脂，辅助材质最多一种磨砂亚克力；固定四分之三正交视角，左上大面积柔光，右下短接触阴影。使用指定色板中的一个底色、一个主色和一个点缀色。主体精确、克制、有实体感，不出现玩具表情、炫彩玻璃、霓虹或镀铬材质。"
+    },
+    {
+      "id": "graphic-print",
+      "name": "几何版画",
+      "geometry": "Large flat silhouettes; one dominant geometric relationship; balanced asymmetry",
+      "materials": "Two ink colors plus one paper ground; restrained uniform fine print grain",
+      "lighting": "Flat, no physical lighting; no extrusion, gradients or cast shadows",
+      "palette": {
+        "ground": "#E9E7E0",
+        "ink": "#263347",
+        "accents": [
+          "#4869D0",
+          "#6E875B",
+          "#C8794E"
+        ]
+      },
+      "strength": "Strong editorial identity; readable at small size; suitable for repeated article covers",
+      "risk": "Existing colorful app icons need careful staging on an otherwise restrained palette; less screenshot-led",
+      "promptSuffix": "当代几何丝网版画。一个平面背景，加两种油墨色；大色块与清晰轮廓，轻微且均匀的细颗粒纸感，非对称但平衡的构图。无立体挤出、无渐变、无物理投影、无贴纸和装饰标签。图形应在小尺寸下仍有强烈轮廓。原有品牌图标作为保真例外，禁止改色或重画。"
+    },
+    {
+      "id": "paper-relief",
+      "name": "纸雕浅浮层",
+      "geometry": "Top-down view; three to five precision-cut layers; shallow consistent depth; generous negative space",
+      "materials": "Fine matte colored paper with subtle visible fibers; no torn edges or scrapbook accessories",
+      "lighting": "Soft upper-left light; shallow down-right contact shadows; no deep diorama perspective",
+      "palette": {
+        "ground": "#E8E6EE",
+        "layers": [
+          "#C9D5EB",
+          "#C5D8CE",
+          "#D7C8E2",
+          "#E8C9B7"
+        ],
+        "ink": "#454C65"
+      },
+      "strength": "Balances warmth and precision; adds tactility without dominating a reading-oriented site",
+      "risk": "Can become childish or decorative unless subject count, layer count and saturation remain controlled",
+      "promptSuffix": "精密纸雕浅浮层插画。固定俯视视角，三至五层哑光彩纸，轻微纸纤维和干净裁切边缘，左上柔光，右下浅接触阴影，整体深度克制。使用指定低饱和色板，主体层与背景有清晰明度差。无撕纸、胶带、手写字、花边、贴纸、儿童卡通脸或复杂微缩场景。"
+    }
+  ],
+  "basePrompt": "为 SandyKid 网站绘制一张文章或项目封面。内容类型：{文章/有图标项目/有截图项目/无素材项目}。内容摘要：{基于原文的2至3句摘要}。核心观点：{读者应理解的一句话}。视觉隐喻：{一个具体物件关系}。参考素材角色：{风格参考/必须保真的原始图标/原始截图/无}。使用已选视觉规范：{styleSuffix}。构图为16:9，单一主体占画面宽度45%至65%，重要元素位于中央76%区域，四周至少留8%呼吸空间。最多三个辅助元素。指定底色：{ground}；主色：{primary}；点缀色：{accent}。无标题、日期、品牌自造文字、水印和边框。不要虚构产品界面或官方标志。有图标时仅生成场景并预留{位置}，原图标后期保真合成。",
+  "exampleMetaphors": {
+    "AI Agent 安全与防护策略": "A branching agent path crossing a controlled gate, illustrating access boundaries rather than total safety",
+    "AI Agent 与硬件": "A software module connecting to a tangible mechanical interface, emphasizing contact with the physical world",
+    "当代码越来越便宜": "Many identical code blocks around one carefully fitted joint, contrasting abundant code with scarce design judgment",
+    "Wallpaper-shift": "The same landscape across dawn, sunset and night panels",
+    "Xiaobai": "Two complementary pieces connecting through three stepping stones",
+    "evk": "Two containers sharing a single set of keys without scattering copies",
+    "Konbini": "Use the actual store scene as the recognizable subject; no generic replacement convenience store"
+  },
+  "selectedStyle": "paper-relief"
+}

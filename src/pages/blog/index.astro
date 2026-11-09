@@ -1,147 +1,75 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ContentCard from '../../components/ContentCard.astro';
 import { SITE_TITLE } from '../../consts';
-
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
-
-// Group by year (descending)
-type Post = (typeof posts)[number];
-const groups = posts.reduce<Record<string, Post[]>>((acc, p) => {
-	const y = String(p.data.pubDate.getFullYear());
-	(acc[y] ??= []).push(p);
-	return acc;
-}, {});
-const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+const posts = (await getCollection('blog')).sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const years = [...new Set(posts.map(post => post.data.pubDate.getUTCFullYear()))];
+const tags = [...new Set(posts.flatMap(post => post.data.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+const tagCount = (tag: string) => posts.filter(post => post.data.tags.includes(tag)).length;
 ---
-
 <!doctype html>
-<html lang="zh-CN" data-mode="personal">
-	<head>
-		<BaseHead title={`Writing — ${SITE_TITLE}`} description="所有文章" />
-		<script is:inline>
-			(function () {
-				try {
-					var m = localStorage.getItem('sk-mode');
-					if (m === 'personal' || m === 'professional') {
-						document.documentElement.setAttribute('data-mode', m);
-					}
-				} catch (e) { /* noop */ }
-			})();
-		</script>
-	</head>
-	<body>
-		<Header />
-
-		<main class="wrap">
-			<header class="page-head rise rise-1">
-				<p class="kicker"><span class="sym">⌗</span>&nbsp; All writing</p>
-				<h1>笔 记</h1>
-			</header>
-
-			{years.map((year) => (
-				<section class="year-block">
-					<h2 class="year">{year}</h2>
-					<ol class="post-list">
-						{groups[year].map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`} class="post-row no-underline">
-									<span class="post-date tnum"><FormattedDate date={post.data.pubDate} format="iso" /></span>
-									<span class="post-title">{post.data.title}</span>
-									{post.data.tags?.length > 0 && (
-										<span class="post-tags">
-											{post.data.tags.map((t) => <span class="tag">{t}</span>)}
-										</span>
-									)}
-								</a>
-							</li>
-						))}
-					</ol>
-				</section>
-			))}
-		</main>
-
-		<Footer />
-
-		<style>
-			.page-head { padding-block: clamp(3rem, 8vw, 5rem) 2.5rem; }
-			.kicker {
-				font-family: var(--font-display);
-				font-size: 0.85rem;
-				color: var(--ink-3);
-				letter-spacing: 0.16em;
-				text-transform: uppercase;
-				margin: 0 0 1.2rem;
-			}
-			.page-head h1 {
-				font-family: var(--font-display);
-				font-weight: 600;
-				font-size: clamp(2.6rem, 6vw, 4rem);
-				letter-spacing: -0.02em;
-				margin: 0;
-			}
-
-			.year-block { margin-bottom: 3rem; }
-			.year {
-				font-family: var(--font-mono);
-				font-size: 0.8rem;
-				letter-spacing: 0.18em;
-				color: var(--ink-4);
-				margin: 0 0 0.4rem;
-				font-weight: 400;
-			}
-			.post-list {
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				border-top: 1px solid var(--rule);
-			}
-			.post-row {
-				display: grid;
-				grid-template-columns: 6.5rem 1fr auto;
-				align-items: baseline;
-				gap: 1.2rem;
-				padding-block: 1.05rem;
-				border-bottom: 1px solid var(--rule);
-				color: var(--ink);
-				transition: padding-left 220ms ease, color 180ms ease;
-			}
-			.post-row:hover { padding-left: 0.4rem; color: var(--accent); }
-			.post-date {
-				font-family: var(--font-mono);
-				font-size: 0.78rem;
-				color: var(--ink-3);
-			}
-			.post-title {
-				font-family: var(--font-body);
-				font-size: 1.08rem;
-				font-variation-settings: 'opsz' 18, 'SOFT' 30;
-				line-height: 1.4;
-			}
-			.post-tags { display: inline-flex; gap: 0.4rem; }
-			.tag {
-				font-family: var(--font-display);
-				font-size: 0.72rem;
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-				color: var(--ink-3);
-				border: 1px solid var(--rule);
-				padding: 0.12rem 0.5rem;
-				border-radius: 999px;
-				white-space: nowrap;
-			}
-			@media (max-width: 560px) {
-				.post-row {
-					grid-template-columns: 1fr;
-					gap: 0.35rem;
-				}
-				.post-tags { margin-top: 0.2rem; }
-			}
-		</style>
-	</body>
+<html lang="zh-CN">
+  <head><BaseHead title={`博客 · ${SITE_TITLE}`} description="关于 AI、软件工程与日常工具的思考和实践。" /></head>
+  <body>
+    <Header />
+    <main id="main" class="container">
+      <header class="page-heading"><h1>博客</h1><p class="page-intro">关于 AI、软件，以及把想法变成现实的过程。</p></header>
+      {tags.length > 0 && <div class="blog-filters" hidden>
+        <span class="filter-label" id="filter-label">标签</span>
+        <div class="tag-filter-bar" role="group" aria-labelledby="filter-label">
+          <button type="button" class="tag-filter" data-filter-tag="" aria-pressed="true">全部 <span>{posts.length}</span></button>
+          {tags.map(tag => <button type="button" class="tag-filter" data-filter-tag={tag} aria-pressed="false">{tag} <span>{tagCount(tag)}</span></button>)}
+        </div>
+        <p class="sr-only" id="filter-status" role="status" aria-live="polite"></p>
+      </div>}
+      <p class="empty-state" id="no-tag-matches" hidden>没有符合这个标签的文章。<a href="/blog/" data-clear-filter>查看全部文章</a></p>
+      {years.map(year => <section class="archive-year" aria-labelledby={`year-${year}`}><h2 id={`year-${year}`}>{year}</h2><div class="blog-grid archive-grid">{posts.filter(post => post.data.pubDate.getUTCFullYear() === year).map(post => <ContentCard post={post} />)}</div></section>)}
+      {!posts.length && <p class="empty-state">还没有文章，下一篇想法正在路上。</p>}
+    </main>
+    <Footer />
+    <script>
+      const main = document.querySelector<HTMLElement>('#main');
+      const filters = main?.querySelector<HTMLElement>('.blog-filters');
+      const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter-tag]')];
+      const cards = [...document.querySelectorAll<HTMLElement>('[data-post-tags]')];
+      const groups = [...document.querySelectorAll<HTMLElement>('.archive-year')];
+      const status = document.querySelector<HTMLElement>('#filter-status');
+      const empty = document.querySelector<HTMLElement>('#no-tag-matches');
+      const tagOfURL = () => new URL(window.location.href).searchParams.get('tag') || '';
+      const apply = (tag: string) => {
+        let count = 0;
+        cards.forEach(card => {
+          const tags: string[] = JSON.parse(card.dataset.postTags || '[]');
+          card.hidden = Boolean(tag) && !tags.includes(tag);
+          if (!card.hidden) count++;
+        });
+        groups.forEach(group => { group.hidden = !group.querySelector('[data-post-tags]:not([hidden])'); });
+        buttons.forEach(button => { button.setAttribute('aria-pressed', String(button.dataset.filterTag === tag)); });
+        if (status) status.textContent = tag ? `标签「${tag}」· ${count} 篇文章` : `共 ${count} 篇文章`;
+        if (empty) empty.hidden = count !== 0 || !tag;
+      };
+      const choose = (tag: string) => {
+        const url = new URL(window.location.href);
+        if (tag) url.searchParams.set('tag', tag); else url.searchParams.delete('tag');
+        if (url.href !== window.location.href) window.history.pushState(null, '', url);
+        apply(tag);
+      };
+      if (main) {
+        if (filters) filters.hidden = false;
+        buttons.forEach(button => button.addEventListener('click', () => choose(button.dataset.filterTag || '')));
+        main.addEventListener('click', event => {
+          if (!(event.target instanceof Element)) return;
+          const link = event.target.closest<HTMLAnchorElement>('a[data-tag-link], a[data-clear-filter]');
+          if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+          event.preventDefault();
+          choose(link.hasAttribute('data-clear-filter') ? '' : new URL(link.href).searchParams.get('tag') || '');
+        });
+        window.addEventListener('popstate', () => apply(tagOfURL()));
+        apply(tagOfURL());
+      }
+    </script>
+  </body>
 </html>

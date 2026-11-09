@@ -1,0 +1,20 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/projects';
+import { SITE_TITLE } from '../../consts';
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head><BaseHead title={`项目 · ${SITE_TITLE}`} description="一些面向日常、创作与开发的小项目。" /></head>
+  <body>
+    <Header />
+    <main id="main" class="container">
+      <header class="page-heading"><h1>项目</h1><p class="page-intro">一些面向日常、创作与开发的小东西。</p></header>
+      <div class="project-grid">{projects.map(project => <ProjectCard project={project} />)}</div>
+    </main>
+    <Footer />
+  </body>
+</html>

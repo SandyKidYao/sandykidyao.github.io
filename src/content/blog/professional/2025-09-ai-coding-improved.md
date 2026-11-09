@@ -3,6 +3,9 @@ title: "关于在正式项目中使用 AI 编程工具提升效率"
 description: "在企业级项目中使用 AI 编程工具的实践经验：工程维护、推荐工作流、模型策略与避坑指南。"
 pubDate: 2025-09-09
 tags: ["软件工程"]
+cover:
+  src: /covers/ai-workflow.svg
+  alt: 三个等距检查节点，表达 AI 编程的工程工作流
 ---
 [![BB](https://img.shields.io/badge/created_with-BB-FFD900)](https://github.com/FulcrumStd/blogbuddy)
 [![BB](https://img.shields.io/badge/improved_by-BB-FFD900)](https://github.com/FulcrumStd/blogbuddy)

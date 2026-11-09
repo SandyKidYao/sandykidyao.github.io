@@ -4,6 +4,9 @@ description: 这是一篇学习某开源 AI Harness 攻击案例项目的总结�
 pubDate: 2026-10-27T00:00:00.000Z
 tags:
   - 软件工程
+cover:
+  src: /covers/agent-safety.svg
+  alt: 同心边界与四向路径，表达 AI Agent 的受控访问
 ---
 
 [![BB](https://img.shields.io/badge/created_with-BB-FFD900)](https://github.com/FulcrumStd/blogbuddy)

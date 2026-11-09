@@ -3,6 +3,9 @@ title: "当代码越来越便宜"
 description: "AI 编程工具让代码越来越便宜，但写代码从来都不是软件工程最难的部分——这对开发者意味着什么。"
 pubDate: 2026-02-24
 tags: ["软件工程"]
+cover:
+  src: /covers/cheap-code.svg
+  alt: 镜像代码括号与中央连接，表达代码与软件工程的关系
 ---
 [![BB](https://img.shields.io/badge/created_with-BB-FFD900)](https://github.com/FulcrumStd/blogbuddy)
 
