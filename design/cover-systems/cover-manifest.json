@@ -20,6 +20,20 @@
       "social": "/covers/social/agent-safety.png"
     },
     {
+      "id": "baner",
+      "src": "/covers/baner.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md"
+    },
+    {
+      "id": "blogbuddy",
+      "src": "/covers/blogbuddy.svg",
+      "style": "geometric-line",
+      "method": "authored-svg",
+      "prompt": "design/cover-systems/prompts/geometric-line.md"
+    },
+    {
       "id": "ai-hardware",
       "src": "/covers/ai-hardware.svg",
       "style": "geometric-line",
@@ -96,6 +110,8 @@
     "/icons/konbini.png": "https://raw.githubusercontent.com/SandyKidYao/konbini/main/desktop/icon.png",
     "/icons/wallpaper-shift.png": "https://raw.githubusercontent.com/SandyKidYao/wallpaper-shift/main/design/icon/png/icon-512.png",
     "/icons/a-watcher.png": "https://raw.githubusercontent.com/SandyKidYao/a-watcher/main/docs/images/app-icon.png",
-    "/icons/nowly.svg": "https://raw.githubusercontent.com/SandyKidYao/nowly/main/assets/brand/nowly-app-icon.svg"
+    "/icons/nowly.svg": "https://raw.githubusercontent.com/SandyKidYao/nowly/main/assets/brand/nowly-app-icon.svg",
+    "/icons/blogbuddy.png": "https://raw.githubusercontent.com/FulcrumStd/blogbuddy/main/images/icon.png",
+    "/icons/baner.png": "https://raw.githubusercontent.com/SandyKidYao/baner/main/site/icon.png"
   }
 }

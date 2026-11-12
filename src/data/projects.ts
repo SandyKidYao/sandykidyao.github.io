@@ -12,6 +12,22 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: 'BlogBuddy', slug: 'blogbuddy',
+    description: '在 VS Code 中专注写 Markdown，把问题留在段落旁，让 AI 在页边回应。',
+    category: 'VS Code · 写作工具', cover: '/covers/blogbuddy.svg',
+    coverAlt: '居中的文稿框线，两侧等距旁注通过短线连接到段落',
+    repository: 'https://github.com/FulcrumStd/blogbuddy',
+    website: 'https://sandykidyao.github.io/blogbuddy/', icon: '/icons/blogbuddy.png',
+  },
+  {
+    name: 'Baner', slug: 'baner',
+    description: '超轻量的分块记事板：同页书写、按 tab 的 git 同步与端侧加密。',
+    category: 'macOS · 记事板', cover: '/covers/baner.svg',
+    coverAlt: '居中的画板内，三个等大文本块自上而下等距排列并相连',
+    repository: 'https://github.com/SandyKidYao/baner',
+    website: 'https://sandykidyao.github.io/baner/', icon: '/icons/baner.png',
+  },
+  {
     name: 'Konbini', slug: 'konbini',
     description: '一间随时间、天气与四季变化的便利店，留给桌面，也留给忙碌的一天。',
     category: 'Three.js · 桌面场景', cover: '/covers/konbini.svg',
@@ -25,6 +41,7 @@ export const projects: Project[] = [
     category: 'Android · 壁纸', cover: '/covers/wallpaper-shift.svg',
     coverAlt: '三个等宽风景框架，依次表现清晨、白天与夜晚',
     repository: 'https://github.com/SandyKidYao/wallpaper-shift', icon: '/icons/wallpaper-shift.png',
+    website: 'https://sandykidyao.github.io/wallpaper-shift/',
   },
   {
     name: 'nowly', slug: 'nowly',

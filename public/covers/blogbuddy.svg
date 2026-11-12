@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <title>BlogBuddy：文稿与页边旁注</title>
+  <rect width="1600" height="900" fill="#EAE5F1"/>
+  <g fill="none" stroke="#7C689B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="560" y="210" width="480" height="480" rx="24"/>
+    <path d="M640 310H960M640 370H960M640 430H880M640 530H960M640 590H960"/>
+    <rect x="320" y="370" width="160" height="160" rx="24"/>
+    <rect x="1120" y="370" width="160" height="160" rx="24"/>
+    <path d="M480 450H560M1040 450H1120M360 430H440M360 470H410M1160 430H1240M1160 470H1210"/>
+  </g>
+</svg>
